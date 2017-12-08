@@ -20,7 +20,7 @@ class Day01Part2Solver implements Solver
             }
         }
 
-        return $result * 2;
+        return (string)($result * 2);
     }
 
     /**
