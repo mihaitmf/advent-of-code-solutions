@@ -29,9 +29,10 @@ Your puzzle answer was 419.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;
+use AdventOfCode2017\Day03\Day03Part1Solver;
 
-require_once '../../bootstrap.php';
+require_once '../bootstrap.php';
 
 $input = 289326;
-$output = (new SolutionRunner(new \AdventOfCode2017\Day03\Day03Part1Solver()))->run($input);
+$output = (new SolutionRunner(new Day03Part1Solver()))->run($input);
 print($output);

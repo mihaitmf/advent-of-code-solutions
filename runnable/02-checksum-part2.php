@@ -26,8 +26,9 @@ Your puzzle answer was 280.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;
+use AdventOfCode2017\Day02\Day02Part2Solver;
 
-require_once '../../bootstrap.php';
+require_once '../bootstrap.php';
 
 $input = '157	564	120	495	194	520	510	618	244	443	471	473	612	149	506	138
 1469	670	47	604	1500	238	1304	1426	54	749	1218	1409	60	51	1436	598
@@ -46,5 +47,5 @@ $input = '157	564	120	495	194	520	510	618	244	443	471	473	612	149	506	138
 2837	2747	2856	426	72	78	2361	96	2784	2780	98	2041	2444	1267	2167	2480
 411	178	4263	4690	3653	162	3201	4702	3129	2685	3716	147	3790	4888	79	165';
 
-$output = (new SolutionRunner(new \AdventOfCode2017\Day02\Day02Part2Solver()))->run($input);
+$output = (new SolutionRunner(new Day02Part2Solver()))->run($input);
 print($output);
