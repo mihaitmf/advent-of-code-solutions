@@ -30,6 +30,6 @@ use AdventOfCode2017\Day03\Day03Part2Solver;
 
 require_once '../bootstrap.php';
 
-$input = 289326;
+$input = file_get_contents('inputs/03-input.txt');
 $output = (new SolutionRunner(new Day03Part2Solver()))->run($input);
 print($output);

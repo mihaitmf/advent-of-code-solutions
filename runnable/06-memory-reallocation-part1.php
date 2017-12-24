@@ -35,6 +35,6 @@ use AdventOfCode2017\Day06\Day06Part1Solver;
 
 require_once '../bootstrap.php';
 
-$input = '14	0	15	12	11	11	3	5	1	6	8	4	9	1	8	4';
+$input = file_get_contents('inputs/06-input.txt');
 $output = (new SolutionRunner(new Day06Part1Solver()))->run($input);
 print($output);
