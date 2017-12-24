@@ -6,19 +6,25 @@ use AdventOfCode2017\Common\Solver;
 
 class Day06Part2Solver implements Solver
 {
+    /** @var Day06Part1Solver */
+    private $part1Solver;
+
+    public function __construct(Day06Part1Solver $part1Solver)
+    {
+        $this->part1Solver = $part1Solver;
+    }
+
     /**
      * @param string $input
      * @return string
      */
     public function solve($input)
     {
-        $part1Solver = new Day06Part1Solver();
-
         $states = [$input];
         $blocks = array_map('intval', explode("\t", $input));
 
         while (true) {
-            $blocks = $part1Solver->redistribute($blocks);
+            $blocks = $this->part1Solver->redistribute($blocks);
 
             $newState = implode("\t", $blocks);
             foreach ($states as $index => $state) {
