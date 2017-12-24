@@ -57,7 +57,7 @@ class Day06Part1Solver implements Solver
      * @param int[] $blocks
      * @return int
      */
-    private function redistribute(array $blocks)
+    public function redistribute(array $blocks)
     {
         $maxIndex = $this->findMax($blocks);
         $maxValue = $blocks[$maxIndex];
