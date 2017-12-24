@@ -26,7 +26,7 @@ Given the initial block counts in your puzzle input, how many redistribution cyc
 To begin, get your puzzle input.
 14	0	15	12	11	11	3	5	1	6	8	4	9	1	8	4
 
-Your puzzle answer was 419.
+Your puzzle answer was 11137.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;
