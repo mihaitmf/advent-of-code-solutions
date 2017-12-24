@@ -53,7 +53,7 @@ Your puzzle answer was ???.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;
-use AdventOfCode2017\Day06\Day07Part1Solver;
+use AdventOfCode2017\Day07\Day07Part1Solver;
 
 require_once '../bootstrap.php';
 

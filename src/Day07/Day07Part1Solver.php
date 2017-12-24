@@ -1,5 +1,5 @@
 <?php
-namespace AdventOfCode2017\Day06;
+namespace AdventOfCode2017\Day07;
 
 use AdventOfCode2017\Common\SolutionExample;
 use AdventOfCode2017\Common\Solver;
