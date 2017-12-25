@@ -27,17 +27,7 @@ class Day08Part1Solver implements Solver
             $registers = $this->applyOperationOnRegister($registerParts, $registers);
         }
 
-        $maxRegisterValue = null;
-        foreach ($registers as $registerValue) {
-            if ($maxRegisterValue === null) {
-                $maxRegisterValue = $registerValue;
-
-            } elseif ($registerValue > $maxRegisterValue) {
-                $maxRegisterValue = $registerValue;
-            }
-        }
-
-        return $maxRegisterValue;
+        return $this->findMaxValue($registers);
     }
 
     /**
@@ -62,7 +52,7 @@ c inc -20 if c == 10',
      * @return bool
      * @throws \Exception
      */
-    private function isConditionFulfilled(array $conditionParts, array $registers)
+    public function isConditionFulfilled(array $conditionParts, array $registers)
     {
         $conditionRegister = $conditionParts[0];
         $conditionOperator = $conditionParts[1];
@@ -97,7 +87,7 @@ c inc -20 if c == 10',
      * @return array
      * @throws \Exception
      */
-    private function applyOperationOnRegister(array $registerParts, array $registers)
+    public function applyOperationOnRegister(array $registerParts, array $registers)
     {
         $registerToUpdate = $registerParts[0];
         $registerOperation = $registerParts[1];
@@ -119,5 +109,23 @@ c inc -20 if c == 10',
         }
 
         return $registers;
+    }
+
+    /**
+     * @param array $registers
+     * @return int
+     */
+    private function findMaxValue(array $registers)
+    {
+        $maxRegisterValue = null;
+        foreach ($registers as $registerValue) {
+            if ($maxRegisterValue === null) {
+                $maxRegisterValue = $registerValue;
+
+            } elseif ($registerValue > $maxRegisterValue) {
+                $maxRegisterValue = $registerValue;
+            }
+        }
+        return $maxRegisterValue;
     }
 }
