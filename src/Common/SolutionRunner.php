@@ -23,7 +23,9 @@ class SolutionRunner
         foreach ($this->solver->getExamples() as $index => $example) {
             $solverOutput = $this->solver->solve($example->getInput());
             if ($solverOutput != $example->getOutput()) {
-                throw new Exception("Error in example #{$index}, got output: {$solverOutput}");
+                throw new Exception(
+                    "Error in example #{$index}, got output: {$solverOutput}, expected: {$example->getOutput()}"
+                );
             }
         }
 
