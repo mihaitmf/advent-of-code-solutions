@@ -12,7 +12,24 @@ class Day07Part1Solver implements Solver
      */
     public function solve($input)
     {
-        //TODO
+        $nodes = $this->parseInput($input);
+
+        $isChildNode = [];
+        foreach ($nodes as $node) {
+            if (!array_key_exists($node->getName(), $isChildNode)) {
+                $isChildNode[$node->getName()] = 0;
+            }
+
+            foreach ($node->getChildren() as $childNodeName) {
+                $isChildNode[$childNodeName] = 1;
+            }
+        }
+
+        foreach ($isChildNode as $nodeName => $status) {
+            if ($status === 0) {
+                return $nodeName;
+            }
+        }
     }
 
     /**
@@ -38,5 +55,26 @@ cntj (57)',
                 'tknk'
             ),
         ];
+    }
+
+    /**
+     * @param string $input
+     * @return Node[]
+     * @throws \Exception
+     */
+    private function parseInput($input)
+    {
+        $rows = explode("\r\n", $input);
+        $nodes = [];
+        foreach ($rows as $row) {
+            if (preg_match('/(\w+)\s\(([0-9]+)\)\s->\s(.+)/', $row, $matches)) {
+                $nodes[] = new Node($matches[1], $matches[2], explode(', ', $matches[3]));
+            } elseif (preg_match('/(\w+)\s\(([0-9]+)\)/', $row, $matches)) {
+                $nodes[] = new Node($matches[1], $matches[2], []);
+            } else {
+                throw new \Exception("Input parsing exception for row {$row}");
+            }
+        }
+        return $nodes;
     }
 }
