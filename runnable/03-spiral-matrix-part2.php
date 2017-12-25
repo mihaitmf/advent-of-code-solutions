@@ -19,7 +19,7 @@ Once a square is written, its value does not change. Therefore, the first few sq
 304    5    4    2   57
 330   10    1    1   54
 351   11   23   25   26
-362  747  806--->   ...
+362  747  806--->854 905  ...
 What is the first value written that is larger than your puzzle input?
 
 Your puzzle input is still 289326.

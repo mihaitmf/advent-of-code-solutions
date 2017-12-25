@@ -20,12 +20,12 @@ class Day03Part2Solver implements Solver
      */
     public function getExamples()
     {
-        //TODO
         return [
-            SolutionExample::of('1', '0'),
-            SolutionExample::of('12', '3'),
-            SolutionExample::of('23', '2'),
-            SolutionExample::of('1024', '31'),
+            SolutionExample::of('3', '4'),
+            SolutionExample::of('12', '23'),
+            SolutionExample::of('26', '54'),
+            SolutionExample::of('124', '133'),
+            SolutionExample::of('500', '747'),
         ];
     }
 }
