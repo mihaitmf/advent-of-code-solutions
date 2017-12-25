@@ -39,6 +39,23 @@ gyxo (61)
 cntj (57)',
                 'tknk'
             ),
+            SolutionExample::of(
+                'pbga (66)
+havc (66) -> aaaa, bbbb
+ktlj (57)
+fwft (72) -> ktlj, cntj
+qoyq (66) -> cccc
+padx (45) -> pbga, havc, qoyq
+tknk (41) -> ugml, padx, fwft
+ugml (68) -> gyxo
+gyxo (61)
+aaaa (1)
+bbbb (2)
+cccc (3)
+zzzz (4) -> tknk
+cntj (57)',
+                'zzzz'
+            ),
         ];
     }
 
