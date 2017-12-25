@@ -31,7 +31,7 @@ How many steps does it take to reach the exit?
 
 To begin, get your puzzle input.
 
-Your puzzle answer was ???.
+Your puzzle answer was 391540.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;

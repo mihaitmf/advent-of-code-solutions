@@ -12,7 +12,20 @@ class Day05Part1Solver implements Solver
      */
     public function solve($input)
     {
-        //TODO
+        $instructions = explode("\r\n", $input);
+
+        $lastPosition = count($instructions);
+        $position = 0;
+        $jumps = 0;
+
+        while ($position < $lastPosition) {
+            $value = $instructions[$position];
+            $instructions[$position]++;
+            $position += $value;
+            $jumps++;
+        }
+
+        return $jumps;
     }
 
     /**
