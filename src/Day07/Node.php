@@ -10,18 +10,18 @@ class Node
     private $weight;
 
     /** @var string[] */
-    private $children;
+    private $childrenNames;
 
     /**
      * @param string $name
      * @param int $weight
-     * @param array $children
+     * @param array $childrenNames
      */
-    public function __construct($name, $weight, array $children)
+    public function __construct($name, $weight, array $childrenNames)
     {
         $this->name = $name;
         $this->weight = $weight;
-        $this->children = $children;
+        $this->childrenNames = $childrenNames;
     }
 
     /**
@@ -43,8 +43,8 @@ class Node
     /**
      * @return string[]
      */
-    public function getChildren()
+    public function getChildrenNames()
     {
-        return $this->children;
+        return $this->childrenNames;
     }
 }

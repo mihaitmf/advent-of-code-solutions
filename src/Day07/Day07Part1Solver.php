@@ -14,22 +14,7 @@ class Day07Part1Solver implements Solver
     {
         $nodes = $this->parseInput($input);
 
-        $isChildNode = [];
-        foreach ($nodes as $node) {
-            if (!array_key_exists($node->getName(), $isChildNode)) {
-                $isChildNode[$node->getName()] = 0;
-            }
-
-            foreach ($node->getChildren() as $childNodeName) {
-                $isChildNode[$childNodeName] = 1;
-            }
-        }
-
-        foreach ($isChildNode as $nodeName => $status) {
-            if ($status === 0) {
-                return $nodeName;
-            }
-        }
+        return $this->findRootNodeName($nodes);
     }
 
     /**
@@ -62,19 +47,48 @@ cntj (57)',
      * @return Node[]
      * @throws \Exception
      */
-    private function parseInput($input)
+    public function parseInput($input)
     {
         $rows = explode("\r\n", $input);
         $nodes = [];
         foreach ($rows as $row) {
             if (preg_match('/(\w+)\s\(([0-9]+)\)\s->\s(.+)/', $row, $matches)) {
-                $nodes[] = new Node($matches[1], $matches[2], explode(', ', $matches[3]));
+                $name = $matches[1];
+                $nodes[$name] = new Node($name, $matches[2], explode(', ', $matches[3]));
             } elseif (preg_match('/(\w+)\s\(([0-9]+)\)/', $row, $matches)) {
-                $nodes[] = new Node($matches[1], $matches[2], []);
+                $name = $matches[1];
+                $nodes[$name] = new Node($name, $matches[2], []);
             } else {
                 throw new \Exception("Input parsing exception for row {$row}");
             }
         }
         return $nodes;
+    }
+
+    /**
+     * @param Node[] $nodes
+     * @return string
+     * @throws \Exception
+     */
+    public function findRootNodeName(array $nodes)
+    {
+        $isChildNode = [];
+        foreach ($nodes as $node) {
+            if (!array_key_exists($node->getName(), $isChildNode)) {
+                $isChildNode[$node->getName()] = 0;
+            }
+
+            foreach ($node->getChildrenNames() as $childNodeName) {
+                $isChildNode[$childNodeName] = 1;
+            }
+        }
+
+        foreach ($isChildNode as $nodeName => $status) {
+            if ($status === 0) {
+                return $nodeName;
+            }
+        }
+
+        throw new \Exception("No root node found");
     }
 }
