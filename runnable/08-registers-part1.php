@@ -26,7 +26,7 @@ What is the largest value in any register after completing the instructions in y
 
 To begin, get your puzzle input.
 
-Your puzzle answer was ???.
+Your puzzle answer was 6828.
  */
 
 use AdventOfCode2017\Common\SolutionRunner;
