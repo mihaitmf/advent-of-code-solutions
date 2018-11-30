@@ -12,7 +12,7 @@ class Day05Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $instructions = explode("\r\n", $input);
+        $instructions = explode("\n", $input);
 
         $lastPosition = count($instructions);
         $position = 0;

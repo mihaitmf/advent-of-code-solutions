@@ -12,7 +12,7 @@ class Day02Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $rows = explode("\r\n", $input);
+        $rows = explode("\n", $input);
 
         $sum = 0;
         foreach ($rows as $row) {

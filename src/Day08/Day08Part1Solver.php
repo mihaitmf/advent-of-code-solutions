@@ -12,7 +12,7 @@ class Day08Part1Solver implements Solver
      */
     public function solve($input)
     {
-        $instructions = explode("\r\n", $input);
+        $instructions = explode("\n", $input);
 
         $registers = [];
         foreach ($instructions as $instruction) {

@@ -1,7 +1,34 @@
 {
+  "name": "mihaitmf/advent-of-code-solutions",
+  "description": "Solutions for the problems posted on The Advent of Code website (https://adventofcode.com)",
+  "keywords": ["advent of code", "adventofcode", "advent", "code", "solutions", "mihaitmf"],
+  "homepage": "https://github.com/mihaitmf/advent-of-code-2017",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Mihai Tmf",
+      "email": "mihai.tmf@gmail.com",
+      "homepage": "https://github.com/mihaitmf",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "require": {
+    "php" : "^5.5 || ^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4"
+  },
   "autoload": {
     "psr-4": {
       "AdventOfCode2017\\": ["src/"]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AdventOfCode2017\\Tests\\": "test/"
     }
   }
 }
