@@ -1,13 +1,16 @@
 language: php
 
+php:
+  - 5.5
+  - 7.2
+
 matrix:
   include:
-    - name: "Tests php 5.5"
-      php: "5.5"
+    - name: "Tests"
       env: TEST_SUITE=tests
-    - name: "Tests php 7.2"
-      php: "7.2"
-      env: TEST_SUITE=tests
+  fast_finish: true
+  allow_failures:
+    - php: 7.2
 
 install:
   - composer install
