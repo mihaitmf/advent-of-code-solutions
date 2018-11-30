@@ -7,24 +7,39 @@ use PHPUnit\Framework\TestCase;
 
 class RunnableFilesTest extends TestCase
 {
-    public function testAllRunnableFilesPrintLessThan10Characters()
+    private static $RUNNABLE_DIR_PATH;
+
+    /**
+     * @dataProvider providerRunnableFiles
+     */
+    public function testAllRunnableFilesPrintLessThan10Characters($runnableFilename)
     {
-        $runnableDirPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "runnable";
+        $runnableDirPath = self::$RUNNABLE_DIR_PATH;
+        $output = shell_exec("cd {$runnableDirPath} && php {$runnableFilename}");
+
+        $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
+            . "\nFile name: {$runnableFilename}" . "\nOutput: {$output}";
+
+        $this->assertLessThan(10, strlen($output), $errorMessage);
+    }
+
+    public function providerRunnableFiles()
+    {
+        $dataProviderArray = [];
+
+        self::$RUNNABLE_DIR_PATH = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "runnable";
         $knownForFailingList = [
             "03-spiral-matrix-part2.php",
         ];
 
-        foreach (new DirectoryIterator($runnableDirPath) as $file) {
+        foreach (new DirectoryIterator(self::$RUNNABLE_DIR_PATH) as $file) {
             $filename = $file->getFilename();
 
             if ($file->isFile() && $file->getExtension() === "php" && !in_array($filename, $knownForFailingList, true)) {
-                $output = shell_exec("cd {$runnableDirPath} && php {$filename}");
-                $this->assertLessThan(
-                    10,
-                    strlen($output),
-                    "Output was bigger than 10 characters which most likely means it was an error.\nFile name: {$filename}\nOutput: {$output}"
-                );
+                $dataProviderArray["running {$filename}"] = [$filename];
             }
         }
+
+        return $dataProviderArray;
     }
 }
