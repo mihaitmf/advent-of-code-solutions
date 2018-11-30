@@ -20,7 +20,7 @@ class Day02Part2Solver implements Solver
         foreach ($rows as $row) {
             $items = explode("\t", $row);
 
-            var_dump($row);
+            var_dump($items);
 
             $rowLength = count($items);
 
