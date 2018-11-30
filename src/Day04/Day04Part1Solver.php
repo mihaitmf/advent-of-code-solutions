@@ -12,7 +12,7 @@ class Day04Part1Solver implements Solver
      */
     public function solve($input)
     {
-        $passphrases = explode("\r\n", $input);
+        $passphrases = explode("\n", $input);
 
         $validCount = count($passphrases);
 

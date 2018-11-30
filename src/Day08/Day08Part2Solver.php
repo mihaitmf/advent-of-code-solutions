@@ -20,7 +20,7 @@ class Day08Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $instructions = explode("\r\n", $input);
+        $instructions = explode("\n", $input);
 
         $registers = [];
         $maxRegisterValue = 0;

@@ -66,7 +66,7 @@ cntj (57)',
      */
     public function parseInput($input)
     {
-        $rows = explode("\r\n", $input);
+        $rows = explode("\n", $input);
         $nodes = [];
         foreach ($rows as $row) {
             if (preg_match('/(\w+)\s\(([0-9]+)\)\s->\s(.+)/', $row, $matches)) {
