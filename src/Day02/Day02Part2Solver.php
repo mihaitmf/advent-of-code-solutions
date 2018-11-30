@@ -14,13 +14,9 @@ class Day02Part2Solver implements Solver
     {
         $rows = explode("\r\n", $input);
 
-        var_dump($rows);
-
         $sum = 0;
         foreach ($rows as $row) {
             $items = explode("\t", $row);
-
-            var_dump($items);
 
             $rowLength = count($items);
 
@@ -31,8 +27,6 @@ class Day02Part2Solver implements Solver
                     } elseif ($items[$j] % $items[$i] === 0) {
                         $sum += $items[$j] / $items[$i];
                     }
-
-                    var_dump($sum);
                 }
             }
         }
