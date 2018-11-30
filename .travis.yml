@@ -2,7 +2,7 @@ language: php
 
 matrix:
   include:
-    - name: "Tests php5.5"
+    - name: "Tests php 5.5"
       php: "5.5"
       env: TEST_SUITE=tests
     - name: "Tests php 7.2"
