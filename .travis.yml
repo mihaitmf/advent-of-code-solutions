@@ -1,7 +1,17 @@
 language: php
+
 php:
-  - '5.5'
-  - '7.2'
+  - "5.5"
+  - "7.2"
+
+matrix:
+  include:
+    - name: "Tests"
+      env: TEST_SUITE=tests
+
 install:
   - composer install
+
+script:
+  - phpunit --debug --configuration phpunit.xml --testsuite "$TEST_SUITE"
 
