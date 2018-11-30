@@ -6,6 +6,6 @@
 
 This repository contains my solutions for the problems posted each day on the Advent of Code 2017 website: http://adventofcode.com/2017.
 
-Run `composer update` after cloning the project.
+Run `composer install` after cloning the project.
 
 Run the php files from the *runnable* directory to solve the problems for each day.
