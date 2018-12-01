@@ -19,9 +19,9 @@ class SolutionRunnerIntegrationTest extends TestCase
     /**
      * @dataProvider providerSolutions
      */
-    public function testRunSolutionsExpectedOutput($day, $part, $expectedResult)
+    public function testRunSolutionsExpectedOutputFor2017Event($day, $part, $expectedResult)
     {
-        $actualResult = $this->solutionRunner->run($day, $part);
+        $actualResult = $this->solutionRunner->run(2017, $day, $part);
 
         $this->assertSame($expectedResult, $actualResult, "The solution runner returned a different result");
     }

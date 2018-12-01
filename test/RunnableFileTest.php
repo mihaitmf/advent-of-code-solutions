@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 class RunnableFileTest extends TestCase
 {
     /**
-     * @dataProvider providerImplementedSolutions
+     * @dataProvider providerImplementedSolutionsFor2017Event
      */
-    public function testRunFilePrintsLessThan10Characters($day, $part)
+    public function testRunFilePrintsLessThan10CharactersFor2017Event($day, $part)
     {
         $runnerFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
 
-        $output = shell_exec("php {$runnerFilePath} {$day} {$part}");
+        $output = shell_exec("php {$runnerFilePath} 2017 {$day} {$part}");
 
         $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
             . "\nRunning for Day {$day}, Part {$part}"
@@ -23,7 +23,7 @@ class RunnableFileTest extends TestCase
         $this->assertLessThan(10, strlen($output), $errorMessage);
     }
 
-    public function providerImplementedSolutions()
+    public function providerImplementedSolutionsFor2017Event()
     {
         $dataProviderArray = [];
 
@@ -31,12 +31,12 @@ class RunnableFileTest extends TestCase
             "Day03Part2Solver.php",
         ];
 
-        $srcPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src";
-        foreach (new DirectoryIterator($srcPath) as $fileInsideSrc) {
-            $fileInsideSrcName = $fileInsideSrc->getFilename();
+        $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2017";
+        foreach (new DirectoryIterator($dayParentDirectoryPath) as $dayDirectory) {
+            $dayDirectoryName = $dayDirectory->getFilename();
 
-            if ($fileInsideSrc->isDir() && preg_match("/^Day([0-2][0-9])$/", $fileInsideSrcName, $matches) === 1) {
-                $dayDirectoryPath = $srcPath . DIRECTORY_SEPARATOR . $fileInsideSrcName;
+            if ($dayDirectory->isDir() && preg_match("/^Day([0-2][0-9])$/", $dayDirectoryName, $matches) === 1) {
+                $dayDirectoryPath = $dayParentDirectoryPath . DIRECTORY_SEPARATOR . $dayDirectoryName;
                 $dayNumberString = $matches[1];
 
                 foreach (new DirectoryIterator($dayDirectoryPath) as $fileInsideDay) {
