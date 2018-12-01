@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day04;
 
 use AdventOfCode2017\Common\Solver;
@@ -49,9 +50,9 @@ class Day04Part2Solver implements Solver
                     $validCount--;
                     break;
 
-                } else {
-                    $visited[$sortedWord] = 1;
                 }
+
+                $visited[$sortedWord] = 1;
             }
         }
 

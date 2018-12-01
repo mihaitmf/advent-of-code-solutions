@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day06;
 
 use AdventOfCode2017\Common\Solver;
@@ -94,7 +95,9 @@ class Day06Part1Solver implements Solver
     {
         $maxIndex = 0;
         $maxValue = $blocks[$maxIndex];
-        for ($i = 1; $i < count($blocks); $i++) {
+        $countBlocks = count($blocks);
+
+        for ($i = 1; $i < $countBlocks; $i++) {
             if ($blocks[$i] > $maxValue) {
                 $maxIndex = $i;
                 $maxValue = $blocks[$i];

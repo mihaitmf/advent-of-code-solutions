@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day04;
 
 use AdventOfCode2017\Common\Solver;
@@ -44,10 +45,9 @@ class Day04Part1Solver implements Solver
                 if (array_key_exists($word, $visited)) {
                     $validCount--;
                     break;
-
-                } else {
-                    $visited[$word] = 1;
                 }
+
+                $visited[$word] = 1;
             }
         }
 
