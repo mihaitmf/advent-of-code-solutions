@@ -46,171 +46,187 @@ class DaysSolversMapper
      * @var array
      * Structure details:
      * [
-     *      day-number => [
-     *          part-number => [
-     *              "solver" => <solver class name>,
-     *              "examples" => <examples provider class name>,
-     *              "input" => <input file name>,
+     *      event-year-number => [
+     *          day-number => [
+     *              part-number => [
+     *                  "solver" => <solver class name>,
+     *                  "examples" => <examples provider class name>,
+     *                  "input" => <input file name>,
+     *              ]
      *          ]
      *      ]
      * ]
      */
     private $map = [
-        1 => [
+        2017 => [
             1 => [
-                self::SOLVER_KEY => Day01Part1Solver::class,
-                self::EXAMPLES_KEY => Day01Part1Examples::class,
-                self::INPUT_KEY => "day01.txt",
+                1 => [
+                    self::SOLVER_KEY => Day01Part1Solver::class,
+                    self::EXAMPLES_KEY => Day01Part1Examples::class,
+                    self::INPUT_KEY => "day01.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day01Part2Solver::class,
+                    self::EXAMPLES_KEY => Day01Part2Examples::class,
+                    self::INPUT_KEY => "day01.txt",
+                ],
             ],
             2 => [
-                self::SOLVER_KEY => Day01Part2Solver::class,
-                self::EXAMPLES_KEY => Day01Part2Examples::class,
-                self::INPUT_KEY => "day01.txt",
+                1 => [
+                    self::SOLVER_KEY => Day02Part1Solver::class,
+                    self::EXAMPLES_KEY => Day02Part1Examples::class,
+                    self::INPUT_KEY => "day02.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day02Part2Solver::class,
+                    self::EXAMPLES_KEY => Day02Part2Examples::class,
+                    self::INPUT_KEY => "day02.txt",
+                ],
             ],
-        ],
-        2 => [
-            1 => [
-                self::SOLVER_KEY => Day02Part1Solver::class,
-                self::EXAMPLES_KEY => Day02Part1Examples::class,
-                self::INPUT_KEY => "day02.txt",
+            3 => [
+                1 => [
+                    self::SOLVER_KEY => Day03Part1Solver::class,
+                    self::EXAMPLES_KEY => Day03Part1Examples::class,
+                    self::INPUT_KEY => "day03.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day03Part2Solver::class,
+                    self::EXAMPLES_KEY => Day03Part2Examples::class,
+                    self::INPUT_KEY => "day03.txt",
+                ],
             ],
-            2 => [
-                self::SOLVER_KEY => Day02Part2Solver::class,
-                self::EXAMPLES_KEY => Day02Part2Examples::class,
-                self::INPUT_KEY => "day02.txt",
+            4 => [
+                1 => [
+                    self::SOLVER_KEY => Day04Part1Solver::class,
+                    self::EXAMPLES_KEY => Day04Part1Examples::class,
+                    self::INPUT_KEY => "day04.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day04Part2Solver::class,
+                    self::EXAMPLES_KEY => Day04Part2Examples::class,
+                    self::INPUT_KEY => "day04.txt",
+                ],
             ],
-        ],
-        3 => [
-            1 => [
-                self::SOLVER_KEY => Day03Part1Solver::class,
-                self::EXAMPLES_KEY => Day03Part1Examples::class,
-                self::INPUT_KEY => "day03.txt",
+            5 => [
+                1 => [
+                    self::SOLVER_KEY => Day05Part1Solver::class,
+                    self::EXAMPLES_KEY => Day05Part1Examples::class,
+                    self::INPUT_KEY => "day05.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day05Part2Solver::class,
+                    self::EXAMPLES_KEY => Day05Part2Examples::class,
+                    self::INPUT_KEY => "day05.txt",
+                ],
             ],
-            2 => [
-                self::SOLVER_KEY => Day03Part2Solver::class,
-                self::EXAMPLES_KEY => Day03Part2Examples::class,
-                self::INPUT_KEY => "day03.txt",
+            6 => [
+                1 => [
+                    self::SOLVER_KEY => Day06Part1Solver::class,
+                    self::EXAMPLES_KEY => Day06Part1Examples::class,
+                    self::INPUT_KEY => "day06.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day06Part2Solver::class,
+                    self::EXAMPLES_KEY => Day06Part2Examples::class,
+                    self::INPUT_KEY => "day06.txt",
+                ],
             ],
-        ],
-        4 => [
-            1 => [
-                self::SOLVER_KEY => Day04Part1Solver::class,
-                self::EXAMPLES_KEY => Day04Part1Examples::class,
-                self::INPUT_KEY => "day04.txt",
+            7 => [
+                1 => [
+                    self::SOLVER_KEY => Day07Part1Solver::class,
+                    self::EXAMPLES_KEY => Day07Part1Examples::class,
+                    self::INPUT_KEY => "day07.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day07Part2Solver::class,
+                    self::EXAMPLES_KEY => Day07Part2Examples::class,
+                    self::INPUT_KEY => "day07.txt",
+                ],
             ],
-            2 => [
-                self::SOLVER_KEY => Day04Part2Solver::class,
-                self::EXAMPLES_KEY => Day04Part2Examples::class,
-                self::INPUT_KEY => "day04.txt",
-            ],
-        ],
-        5 => [
-            1 => [
-                self::SOLVER_KEY => Day05Part1Solver::class,
-                self::EXAMPLES_KEY => Day05Part1Examples::class,
-                self::INPUT_KEY => "day05.txt",
-            ],
-            2 => [
-                self::SOLVER_KEY => Day05Part2Solver::class,
-                self::EXAMPLES_KEY => Day05Part2Examples::class,
-                self::INPUT_KEY => "day05.txt",
-            ],
-        ],
-        6 => [
-            1 => [
-                self::SOLVER_KEY => Day06Part1Solver::class,
-                self::EXAMPLES_KEY => Day06Part1Examples::class,
-                self::INPUT_KEY => "day06.txt",
-            ],
-            2 => [
-                self::SOLVER_KEY => Day06Part2Solver::class,
-                self::EXAMPLES_KEY => Day06Part2Examples::class,
-                self::INPUT_KEY => "day06.txt",
-            ],
-        ],
-        7 => [
-            1 => [
-                self::SOLVER_KEY => Day07Part1Solver::class,
-                self::EXAMPLES_KEY => Day07Part1Examples::class,
-                self::INPUT_KEY => "day07.txt",
-            ],
-            2 => [
-                self::SOLVER_KEY => Day07Part2Solver::class,
-                self::EXAMPLES_KEY => Day07Part2Examples::class,
-                self::INPUT_KEY => "day07.txt",
-            ],
-        ],
-        8 => [
-            1 => [
-                self::SOLVER_KEY => Day08Part1Solver::class,
-                self::EXAMPLES_KEY => Day08Part1Examples::class,
-                self::INPUT_KEY => "day08.txt",
-            ],
-            2 => [
-                self::SOLVER_KEY => Day08Part2Solver::class,
-                self::EXAMPLES_KEY => Day08Part2Examples::class,
-                self::INPUT_KEY => "day08.txt",
+            8 => [
+                1 => [
+                    self::SOLVER_KEY => Day08Part1Solver::class,
+                    self::EXAMPLES_KEY => Day08Part1Examples::class,
+                    self::INPUT_KEY => "day08.txt",
+                ],
+                2 => [
+                    self::SOLVER_KEY => Day08Part2Solver::class,
+                    self::EXAMPLES_KEY => Day08Part2Examples::class,
+                    self::INPUT_KEY => "day08.txt",
+                ],
             ],
         ],
     ];
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      *
      * @return string
      * @throws InvalidArgumentException
      */
-    public function getSolverClassname($day, $part)
+    public function getSolverClassname($year, $day, $part)
     {
         if (
-            !array_key_exists($day, $this->map)
-            || !array_key_exists($part, $this->map[$day])
-            || !array_key_exists(self::SOLVER_KEY, $this->map[$day][$part])
+            !array_key_exists($year, $this->map)
+            || !array_key_exists($day, $this->map[$year])
+            || !array_key_exists($part, $this->map[$year][$day])
+            || !array_key_exists(self::SOLVER_KEY, $this->map[$year][$day][$part])
         ) {
-            throw new InvalidArgumentException("Could not find Solver class for Day {$day}, Part {$part}.");
+            throw new InvalidArgumentException(
+                "Could not find Solver class for Event Year {$year}, Day {$day}, Part {$part}."
+            );
         }
 
-        return $this->map[$day][$part][self::SOLVER_KEY];
+        return $this->map[$year][$day][$part][self::SOLVER_KEY];
     }
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      *
      * @return string
      * @throws InvalidArgumentException
      */
-    public function getExamplesProviderClassname($day, $part)
+    public function getExamplesProviderClassname($year, $day, $part)
     {
         if (
-            !array_key_exists($day, $this->map)
-            || !array_key_exists($part, $this->map[$day])
-            || !array_key_exists(self::EXAMPLES_KEY, $this->map[$day][$part])
+            !array_key_exists($year, $this->map)
+            || !array_key_exists($day, $this->map[$year])
+            || !array_key_exists($part, $this->map[$year][$day])
+            || !array_key_exists(self::EXAMPLES_KEY, $this->map[$year][$day][$part])
         ) {
-            throw new InvalidArgumentException("Could not find ExamplesProvider class for Day {$day}, Part {$part}.");
+            throw new InvalidArgumentException(
+                "Could not find ExamplesProvider class for Event Year {$year}, Day {$day}, Part {$part}."
+            );
         }
 
-        return $this->map[$day][$part][self::EXAMPLES_KEY];
+        return $this->map[$year][$day][$part][self::EXAMPLES_KEY];
     }
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      *
      * @return string
      * @throws InvalidArgumentException
      */
-    public function getInputFilename($day, $part)
+    public function getInputFilename($year, $day, $part)
     {
         if (
-            !array_key_exists($day, $this->map)
-            || !array_key_exists($part, $this->map[$day])
-            || !array_key_exists(self::INPUT_KEY, $this->map[$day][$part])
+            !array_key_exists($year, $this->map)
+            || !array_key_exists($day, $this->map[$year])
+            || !array_key_exists($part, $this->map[$year][$day])
+            || !array_key_exists(self::INPUT_KEY, $this->map[$year][$day][$part])
         ) {
-            throw new InvalidArgumentException("Could not find Input filename for Day {$day}, Part {$part}.");
+            throw new InvalidArgumentException(
+                "Could not find Input filename for Event Year {$year}, Day {$day}, Part {$part}."
+            );
         }
 
-        return $this->map[$day][$part][self::INPUT_KEY];
+        return $this->map[$year][$day][$part][self::INPUT_KEY];
     }
 }
