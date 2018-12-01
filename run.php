@@ -1,17 +1,17 @@
 <?php
 
-use AdventOfCode2017\Common\DaysSolversMapper;
-use AdventOfCode2017\Common\SolutionRunner;
+use AdventOfCode\Common\DaysSolversMapper;
+use AdventOfCode\Common\SolutionRunner;
 
 require_once "bootstrap.php";
 
-if ($argc !== 3) {
-    print("The solution runner requires two integer arguments: the day of the problem and the part. Example run solution for day 9, part 2: php run.php 9 2");
+if ($argc !== 4) {
+    print("The solution runner requires three integer arguments: the year of the event, the day and the part of the problem. Example run solution for the 2017 event, day 9, part 2: php run.php 2017 9 2");
     exit(1);
 }
 
 try {
-    $output = (new SolutionRunner(new DaysSolversMapper()))->run($argv[1], $argv[2]);
+    $output = (new SolutionRunner(new DaysSolversMapper()))->run($argv[1], $argv[2], $argv[3]);
 } catch (\Exception $exception) {
     $output = $exception->getMessage();
 }

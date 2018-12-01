@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode2017\Common;
+namespace AdventOfCode\Common;
 
 use Exception;
 use InvalidArgumentException;
@@ -19,34 +19,41 @@ class SolutionRunner
     }
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      *
      * @return string
      * @throws Exception
      */
-    public function run($day, $part)
+    public function run($year, $day, $part)
     {
-        if (!is_numeric($day) || $day < 1 || $day > 25 || !is_numeric($part) || $part < 1 || $part > 2) {
+        if (
+            !is_numeric($year) || $year < 2017 || $year > 2018
+            || !is_numeric($day) || $day < 1 || $day > 25
+            || !is_numeric($part) || $part < 1 || $part > 2
+        ) {
             throw new InvalidArgumentException("Invalid arguments for solution runner!"
-                . " First argument is the Day of the problem, must be an integer between 1 - 25."
-                . " Second argument is the Part of the problem, must be an integer between 1 - 2."
+                . " First argument is the Year of the event, must be an integer between 2017 - 2018."
+                . " Second argument is the Day of the problem, must be an integer between 1 - 25."
+                . " Third argument is the Part of the problem, must be an integer between 1 - 2."
             );
         }
 
-        $solverClass = $this->mapper->getSolverClassname($day, $part);
+        $solverClass = $this->mapper->getSolverClassname($year, $day, $part);
 
         /** @var Solver $solver */
         $solver = new $solverClass();
 
-        $this->runSolutionAgainstExamples($day, $part, $solver);
+        $this->runSolutionAgainstExamples($year, $day, $part, $solver);
 
-        $input = $this->getProblemInput($day, $part);
+        $input = $this->getProblemInput($year, $day, $part);
 
         return $solver->solve($input);
     }
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      * @param Solver $solver
@@ -54,9 +61,9 @@ class SolutionRunner
      * @return void
      * @throws Exception
      */
-    private function runSolutionAgainstExamples($day, $part, Solver $solver)
+    private function runSolutionAgainstExamples($year, $day, $part, Solver $solver)
     {
-        $examplesProviderClass = $this->mapper->getExamplesProviderClassname($day, $part);
+        $examplesProviderClass = $this->mapper->getExamplesProviderClassname($year, $day, $part);
 
         /** @var ExamplesProvider $examplesProvider */
         $examplesProvider = new $examplesProviderClass();
@@ -73,16 +80,17 @@ class SolutionRunner
     }
 
     /**
+     * @param int $year
      * @param int $day
      * @param int $part
      *
      * @return string
      * @throws InvalidArgumentException
      */
-    private function getProblemInput($day, $part)
+    private function getProblemInput($year, $day, $part)
     {
-        $inputFilename = $this->mapper->getInputFilename($day, $part);
-        $inputFilePath = self::$INPUTS_DIRECTORY . DIRECTORY_SEPARATOR . $inputFilename;
+        $inputFilename = $this->mapper->getInputFilename($year, $day, $part);
+        $inputFilePath = self::$INPUTS_DIRECTORY . DIRECTORY_SEPARATOR . $year . DIRECTORY_SEPARATOR . $inputFilename;
 
         if (!is_file($inputFilePath)) {
             throw new InvalidArgumentException("Input file {$inputFilePath} not found");

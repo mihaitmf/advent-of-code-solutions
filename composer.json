@@ -23,12 +23,12 @@
   },
   "autoload": {
     "psr-4": {
-      "AdventOfCode2017\\": ["src/"]
+      "AdventOfCode\\": ["src/"]
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "AdventOfCode2017\\Tests\\": "test/"
+      "AdventOfCode\\Tests\\": "test/"
     }
   }
 }

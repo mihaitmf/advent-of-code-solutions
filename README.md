@@ -1,10 +1,13 @@
-# Advent of Code Solutions 2017
+# Advent of Code Solutions 2017 - 2018
 [![Build Status](https://travis-ci.org/mihaitmf/advent-of-code-2017.svg?branch=master)](https://travis-ci.org/mihaitmf/advent-of-code-2017)
 
 :santa: :christmas_tree: Christmas is approaching so this is a great time to solve some really nice programming puzzles.
 
 This repository contains my solutions for the problems posted each day on the Advent of Code website:
 - 2017 edition: http://adventofcode.com/2017
+- 2018 edition: http://adventofcode.com/2018
+
+The solutions are implemented in *php*.
 
 ## Requirements
 - [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://php.net/)
@@ -13,11 +16,12 @@ This repository contains my solutions for the problems posted each day on the Ad
 ## How to run the solutions
 - Run `composer install` from the root of the project.
 - Execute the `run.php` file to solve the problems for each day.
-The solution runner requires two integer arguments:
+The solution runner requires three integer arguments:
+    - the **year** of the event (2017 or 2018),
     - the **day** of the problem (from 1 to 25),
     - the **part** of the problem (1 or 2).
 
-Example to run solution for day 9, part 2: `php run.php 9 2`
+Example to run solution for the 2017 event, day 9, part 2: `php run.php 2017 9 2`
 
 ## How to add a new solution
 ### The pretty way
@@ -32,10 +36,8 @@ For the situations when we didn't have time to prepare the new classes for the n
 
 The recommendation is to still add the solution "the pretty way" after the fast solution has been finished and submitted.
 
-The runner is located in the `fast-solution` directory.
+The runner is located in the `fast-solution` directory. There is also an empty `input.txt` file. Just paste the problem input into it and the runner will read it. 
 
-There is also an empty `input.txt` file. Just paste the problem input into it. 
-
-The Fast Solution runner comes already prefilled with some common input parsing functions to give you a head start.
+The Fast Solution runner comes prefilled with some common input parsing functions to give you a head start.
 
 ## Enjoy!
