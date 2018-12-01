@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day01;
 
 use AdventOfCode2017\Common\Solver;
@@ -41,12 +42,12 @@ class Day01Part1Solver implements Solver
     {
         $result = 0;
         for ($i = 0; $i < strlen($input) - 1; $i++) {
-            if ($input[$i] == $input[$i + 1]) {
+            if ($input[$i] === $input[$i + 1]) {
                 $result += $input[$i];
             }
         }
 
-        if ($input[0] == $input[strlen($input) - 1]) {
+        if ($input[0] === $input[strlen($input) - 1]) {
             $result += $input[0];
         }
 

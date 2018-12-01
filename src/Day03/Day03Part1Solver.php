@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day03;
 
 use AdventOfCode2017\Common\Solver;
@@ -41,7 +42,11 @@ class Day03Part1Solver implements Solver
     public function solve($input)
     {
         $sqrt = sqrt($input);
-        $squareSize = ceil($sqrt);
+        $squareSize = (int)ceil($sqrt);
+
+        if ($squareSize === 1) {
+            return "0";
+        }
         if ($squareSize % 2 === 0) {
             $squareSize++;
         }
