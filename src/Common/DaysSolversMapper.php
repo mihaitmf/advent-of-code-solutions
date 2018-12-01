@@ -22,6 +22,10 @@ use AdventOfCode2017\Day05\Day05Part1Examples;
 use AdventOfCode2017\Day05\Day05Part1Solver;
 use AdventOfCode2017\Day05\Day05Part2Examples;
 use AdventOfCode2017\Day05\Day05Part2Solver;
+use AdventOfCode2017\Day06\Day06Part1Examples;
+use AdventOfCode2017\Day06\Day06Part1Solver;
+use AdventOfCode2017\Day06\Day06Part2Examples;
+use AdventOfCode2017\Day06\Day06Part2Solver;
 use InvalidArgumentException;
 
 class DaysSolversMapper
@@ -102,6 +106,18 @@ class DaysSolversMapper
                 self::SOLVER_KEY => Day05Part2Solver::class,
                 self::EXAMPLES_KEY => Day05Part2Examples::class,
                 self::INPUT_KEY => "day05.txt",
+            ],
+        ],
+        6 => [
+            1 => [
+                self::SOLVER_KEY => Day06Part1Solver::class,
+                self::EXAMPLES_KEY => Day06Part1Examples::class,
+                self::INPUT_KEY => "day06.txt",
+            ],
+            2 => [
+                self::SOLVER_KEY => Day06Part2Solver::class,
+                self::EXAMPLES_KEY => Day06Part2Examples::class,
+                self::INPUT_KEY => "day06.txt",
             ],
         ],
     ];
