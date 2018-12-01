@@ -7,36 +7,52 @@ use PHPUnit\Framework\TestCase;
 
 class RunnableFileTest extends TestCase
 {
-    private static $RUNNABLE_DIR_PATH;
-
     /**
-     * @dataProvider providerRunnableFiles
+     * @dataProvider providerDayPartArguments
      */
-    public function testAllRunnableFilesPrintLessThan10Characters($runnableFilename)
+    public function testRunFilePrintsLessThan10Characters($day, $part)
     {
-        $runnableDirPath = self::$RUNNABLE_DIR_PATH;
-        $output = shell_exec("cd {$runnableDirPath} && php {$runnableFilename}");
+        $runnerFilePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "run.php";
+
+        $output = shell_exec("php {$runnerFilePath} {$day} {$part}");
 
         $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
-            . "\nFile name: {$runnableFilename}" . "\nOutput: {$output}";
+            . "\nRunning for Day {$day}, Part {$part}"
+            . "\nOutput: {$output}";
 
         $this->assertLessThan(10, strlen($output), $errorMessage);
     }
 
-    public function providerRunnableFiles()
+    public function providerDayPartArguments()
     {
         $dataProviderArray = [];
 
-        self::$RUNNABLE_DIR_PATH = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "runnable";
-        $knownForFailingList = [
-            "03-spiral-matrix-part2.php",
+        $knownForFailingSolvers = [
+            "Day03Part2Solver.php",
         ];
 
-        foreach (new DirectoryIterator(self::$RUNNABLE_DIR_PATH) as $file) {
-            $filename = $file->getFilename();
+        $srcPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "src";
+        foreach (new DirectoryIterator($srcPath) as $fileInsideSrc) {
+            $fileInsideSrcName = $fileInsideSrc->getFilename();
 
-            if ($file->isFile() && $file->getExtension() === "php" && !in_array($filename, $knownForFailingList, true)) {
-                $dataProviderArray["running {$filename}"] = [$filename];
+            if ($fileInsideSrc->isDir() && preg_match("/^Day([0-2][0-9])$/", $fileInsideSrcName, $matches) === 1) {
+                $dayDirectoryPath = $srcPath . DIRECTORY_SEPARATOR . $fileInsideSrcName;
+                $dayNumberString = $matches[1];
+
+                foreach (new DirectoryIterator($dayDirectoryPath) as $fileInsideDay) {
+                    $dayFileName = $fileInsideDay->getFilename();
+
+                    if (
+                        $fileInsideDay->isFile()
+                        && preg_match("/^Day{$dayNumberString}Part([1-2])Solver.php$/", $dayFileName, $matches) === 1
+                        && !in_array($dayFileName, $knownForFailingSolvers, true)
+                    ) {
+                        $partAsInt = (int)$matches[1];
+                        $dayNumberAsInt = (int)$dayNumberString;
+                        $dataProviderArray["running solution for Day {$dayNumberAsInt} Part {$partAsInt}"] = [$dayNumberAsInt, $partAsInt];
+                    }
+                }
+
             }
         }
 
