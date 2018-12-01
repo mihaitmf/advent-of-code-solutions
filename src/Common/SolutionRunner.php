@@ -92,6 +92,6 @@ class SolutionRunner
             throw new InvalidArgumentException("Error reading input file {$inputFilePath}");
         }
 
-        return (string)$input;
+        return trim($input);
     }
 }
