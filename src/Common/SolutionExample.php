@@ -14,6 +14,7 @@ class SolutionExample
     /**
      * @param string $input
      * @param string $output
+     *
      * @return SolutionExample
      */
     public static function of($input, $output)
