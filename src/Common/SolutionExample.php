@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Common;
 
 class SolutionExample
@@ -14,6 +15,7 @@ class SolutionExample
     /**
      * @param string $input
      * @param string $output
+     *
      * @return SolutionExample
      */
     public static function of($input, $output)
