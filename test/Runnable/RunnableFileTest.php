@@ -5,7 +5,7 @@ namespace AdventOfCode2017\Tests\Runnable;
 use DirectoryIterator;
 use PHPUnit\Framework\TestCase;
 
-class RunnableFilesTest extends TestCase
+class RunnableFileTest extends TestCase
 {
     private static $RUNNABLE_DIR_PATH;
 
