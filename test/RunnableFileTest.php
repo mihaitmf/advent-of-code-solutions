@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 class RunnableFileTest extends TestCase
 {
     /**
-     * @dataProvider providerDayPartArguments
+     * @dataProvider providerImplementedSolutions
      */
     public function testRunFilePrintsLessThan10Characters($day, $part)
     {
-        $runnerFilePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "run.php";
+        $runnerFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
 
         $output = shell_exec("php {$runnerFilePath} {$day} {$part}");
 
@@ -23,7 +23,7 @@ class RunnableFileTest extends TestCase
         $this->assertLessThan(10, strlen($output), $errorMessage);
     }
 
-    public function providerDayPartArguments()
+    public function providerImplementedSolutions()
     {
         $dataProviderArray = [];
 
@@ -31,7 +31,7 @@ class RunnableFileTest extends TestCase
             "Day03Part2Solver.php",
         ];
 
-        $srcPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "src";
+        $srcPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src";
         foreach (new DirectoryIterator($srcPath) as $fileInsideSrc) {
             $fileInsideSrcName = $fileInsideSrc->getFilename();
 
