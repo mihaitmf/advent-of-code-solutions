@@ -1,7 +1,9 @@
 <?php
+
 namespace AdventOfCode2017\Day07;
 
 use AdventOfCode2017\Common\Solver;
+use Exception;
 
 /**
 http://adventofcode.com/2017/day/7
@@ -52,8 +54,10 @@ class Day07Part2Solver implements Solver
 
         try {
             $this->calculateBranchWeight($nodes, $nodes[$rootName]);
-        } catch (\Exception $exception) {
+
+        } catch (Exception $exception) {
             $imbalanceMessage = explode(self::IMBALANCE_MESSAGE_DELIMITER, $exception->getMessage());
+
             return $imbalanceMessage[1];
         }
     }
@@ -63,7 +67,7 @@ class Day07Part2Solver implements Solver
      * @param Node $currentNode
      *
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     private function calculateBranchWeight(array $nodes, Node $currentNode)
     {
@@ -90,7 +94,8 @@ class Day07Part2Solver implements Solver
         if ($imbalancedNodeName !== null) {
             $newNodeWeight = $nodes[$imbalancedNodeName]->getWeight() - $childrenBranchWeights[$imbalancedNodeName]
                 + $childrenBranchWeights[$balancedNodeName];
-            throw new \Exception(self::IMBALANCE_MESSAGE_DELIMITER . $newNodeWeight);
+
+            throw new Exception(self::IMBALANCE_MESSAGE_DELIMITER . $newNodeWeight);
         }
 
         return $currentBranchWeight + $sumOfChildrenBranchWeights;
@@ -98,7 +103,7 @@ class Day07Part2Solver implements Solver
 
     /**
      * @param int $sumOfChildrenBranchWeights
-     * @param array $childrenBranchWeights
+     * @param array $childrenBranchWeights Map<string, int>
      *
      * @return array
      */

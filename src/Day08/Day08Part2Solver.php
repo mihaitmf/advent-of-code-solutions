@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day08;
 
 use AdventOfCode2017\Common\Solver;

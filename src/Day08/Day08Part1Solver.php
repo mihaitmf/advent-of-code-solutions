@@ -1,7 +1,9 @@
 <?php
+
 namespace AdventOfCode2017\Day08;
 
 use AdventOfCode2017\Common\Solver;
+use RuntimeException;
 
 /**
 http://adventofcode.com/2017/day/8
@@ -60,11 +62,10 @@ class Day08Part1Solver implements Solver
     }
 
     /**
-     * @param array $conditionParts
-     * @param array $registers
+     * @param string[] $conditionParts
+     * @param array $registers Map<string, int>
      *
      * @return bool
-     * @throws \Exception
      */
     public function isConditionFulfilled(array $conditionParts, array $registers)
     {
@@ -74,7 +75,7 @@ class Day08Part1Solver implements Solver
 
         $registerValue = 0;
         if (array_key_exists($conditionRegister, $registers)) {
-            $registerValue = $registers[$conditionRegister];
+            $registerValue = (int)$registers[$conditionRegister];
         }
 
         switch ($conditionOperator) {
@@ -87,20 +88,19 @@ class Day08Part1Solver implements Solver
             case '>=':
                 return $registerValue >= $conditionValue;
             case '==':
-                return $registerValue == $conditionValue;
+                return $registerValue === $conditionValue;
             case '!=':
-                return $registerValue != $conditionValue;
+                return $registerValue !== $conditionValue;
             default:
-                throw new \Exception("Unexpected operator found: {$conditionOperator}");
+                throw new RuntimeException("Unexpected operator found: {$conditionOperator}");
         }
     }
 
     /**
-     * @param array $registerParts
-     * @param array $registers
+     * @param string[] $registerParts
+     * @param array $registers Map<string, int>
      *
-     * @return array
-     * @throws \Exception
+     * @return array Map<string, int>
      */
     public function applyOperationOnRegister(array $registerParts, array $registers)
     {
@@ -120,14 +120,14 @@ class Day08Part1Solver implements Solver
                 $registers[$registerToUpdate] -= $registerOperationValue;
                 break;
             default:
-                throw new \Exception("Unexpected register operation found: {$registerOperation}");
+                throw new RuntimeException("Unexpected register operation found: {$registerOperation}");
         }
 
         return $registers;
     }
 
     /**
-     * @param array $registers
+     * @param array $registers Map<string, int>
      *
      * @return int
      */
@@ -135,6 +135,7 @@ class Day08Part1Solver implements Solver
     {
         $maxRegisterValue = null;
         foreach ($registers as $registerValue) {
+            $registerValue = (int)$registerValue;
             if ($maxRegisterValue === null) {
                 $maxRegisterValue = $registerValue;
 

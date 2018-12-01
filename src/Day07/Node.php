@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Day07;
 
 class Node
@@ -15,7 +16,7 @@ class Node
     /**
      * @param string $name
      * @param int $weight
-     * @param array $childrenNames
+     * @param string[] $childrenNames
      */
     public function __construct($name, $weight, array $childrenNames)
     {

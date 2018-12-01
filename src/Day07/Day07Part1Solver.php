@@ -1,7 +1,9 @@
 <?php
+
 namespace AdventOfCode2017\Day07;
 
 use AdventOfCode2017\Common\Solver;
+use RuntimeException;
 
 /**
 http://adventofcode.com/2017/day/7
@@ -74,7 +76,6 @@ class Day07Part1Solver implements Solver
      * @param string $input
      *
      * @return Node[]
-     * @throws \Exception
      */
     public function parseInput($input)
     {
@@ -84,11 +85,13 @@ class Day07Part1Solver implements Solver
             if (preg_match('/(\w+)\s\(([0-9]+)\)\s->\s(.+)/', $row, $matches)) {
                 $name = $matches[1];
                 $nodes[$name] = new Node($name, $matches[2], explode(', ', $matches[3]));
+
             } elseif (preg_match('/(\w+)\s\(([0-9]+)\)/', $row, $matches)) {
                 $name = $matches[1];
                 $nodes[$name] = new Node($name, $matches[2], []);
+
             } else {
-                throw new \Exception("Input parsing exception for row {$row}");
+                throw new RuntimeException("Input parsing exception for row {$row}");
             }
         }
         return $nodes;
@@ -98,7 +101,6 @@ class Day07Part1Solver implements Solver
      * @param Node[] $nodes
      *
      * @return string
-     * @throws \Exception
      */
     public function findRootNodeName(array $nodes)
     {
@@ -119,6 +121,6 @@ class Day07Part1Solver implements Solver
             }
         }
 
-        throw new \Exception("No root node found");
+        throw new RuntimeException("No root node found");
     }
 }

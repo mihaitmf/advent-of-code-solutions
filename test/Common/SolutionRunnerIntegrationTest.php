@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Tests\Common;
 
 use AdventOfCode2017\Common\DaysSolversMapper;
