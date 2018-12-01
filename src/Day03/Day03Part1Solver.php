@@ -35,6 +35,7 @@ class Day03Part1Solver implements Solver
 {
     /**
      * @param string $input
+     *
      * @return string
      */
     public function solve($input)
