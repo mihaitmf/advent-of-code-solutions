@@ -1,9 +1,9 @@
 <?php
 
-namespace AdventOfCode2017\Tests\Common;
+namespace AdventOfCode\Tests\Common;
 
-use AdventOfCode2017\Common\DaysSolversMapper;
-use AdventOfCode2017\Common\SolutionRunner;
+use AdventOfCode\Common\DaysSolversMapper;
+use AdventOfCode\Common\SolutionRunner;
 use PHPUnit\Framework\TestCase;
 
 class SolutionRunnerIntegrationTest extends TestCase

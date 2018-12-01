@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode2017\Tests;
+namespace AdventOfCode\Tests;
 
 use DirectoryIterator;
 use PHPUnit\Framework\TestCase;

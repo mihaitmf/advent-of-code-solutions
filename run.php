@@ -1,7 +1,7 @@
 <?php
 
-use AdventOfCode2017\Common\DaysSolversMapper;
-use AdventOfCode2017\Common\SolutionRunner;
+use AdventOfCode\Common\DaysSolversMapper;
+use AdventOfCode\Common\SolutionRunner;
 
 require_once "bootstrap.php";
 

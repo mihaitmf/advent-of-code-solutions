@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode2017\Common;
+namespace AdventOfCode\Common;
 
 use Exception;
 use InvalidArgumentException;
