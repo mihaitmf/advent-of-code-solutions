@@ -25,13 +25,27 @@ class RunnableFileTest extends TestCase
 
     public function providerImplementedSolutionsFor2017Event()
     {
-        $dataProviderArray = [];
-
         $knownForFailingSolvers = [
             "Day03Part2Solver.php",
         ];
 
         $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2017";
+
+        $dataProviderArray = $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
+
+        return $dataProviderArray;
+    }
+
+    /**
+     * @param string $dayParentDirectoryPath
+     * @param array $knownForFailingSolvers
+     *
+     * @return array
+     */
+    private function getImplementedSolutions($dayParentDirectoryPath, array $knownForFailingSolvers)
+    {
+        $dataProviderArray = [];
+
         foreach (new DirectoryIterator($dayParentDirectoryPath) as $dayDirectory) {
             $dayDirectoryName = $dayDirectory->getFilename();
 
