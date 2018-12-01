@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Common;
 
 use Exception;
@@ -82,6 +83,7 @@ class SolutionRunner
     {
         $inputFilename = $this->mapper->getInputFilename($day, $part);
         $inputFilePath = self::$INPUTS_DIRECTORY . DIRECTORY_SEPARATOR . $inputFilename;
+
         if (!is_file($inputFilePath)) {
             throw new InvalidArgumentException("Input file {$inputFilePath} not found");
         }

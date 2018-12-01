@@ -1,4 +1,5 @@
 <?php
+
 namespace AdventOfCode2017\Common;
 
 class SolutionExample
