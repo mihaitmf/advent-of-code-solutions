@@ -1,30 +1,24 @@
 <?php
+
 namespace AdventOfCode2017\Day07;
 
-use AdventOfCode2017\Common\SolutionExample;
 use AdventOfCode2017\Common\Solver;
+use RuntimeException;
 
-class Day07Part1Solver implements Solver
-{
-    /**
-     * @param string $input
-     * @return string
-     */
-    public function solve($input)
-    {
-        $nodes = $this->parseInput($input);
+/**
+http://adventofcode.com/2017/day/7
 
-        return $this->findRootNodeName($nodes);
-    }
+--- Day 7: Recursive Circus ---
 
-    /**
-     * @return SolutionExample[]
-     */
-    public function getExamples()
-    {
-        return [
-            SolutionExample::of(
-                'pbga (66)
+Wandering further through the circuits of the computer, you come upon a tower of programs that have gotten themselves into a bit of trouble. A recursive algorithm has gotten out of hand, and now they're balanced precariously in a large tower.
+
+One program at the bottom supports the entire tower. It's holding a large disc, and on the disc are balanced several more sub-towers. At the bottom of these sub-towers, standing on the bottom disc, are other programs, each holding their own disc, and so on. At the very tops of these sub-sub-sub-...-towers, many programs stand simply keeping the disc below them balanced but with no disc of their own.
+
+You offer to help, but first you need to understand the structure of these towers. You ask each program to yell out their name, their weight, and (if they're holding a disc) the names of the programs immediately above them balancing on that disc. You write this information down (your puzzle input). Unfortunately, in their panic, they don't do this in an orderly fashion; by the time you're done, you're not sure which program gave which information.
+
+For example, if your list is the following:
+
+pbga (66)
 xhth (57)
 ebii (61)
 havc (66)
@@ -36,33 +30,52 @@ tknk (41) -> ugml, padx, fwft
 jptl (61)
 ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
-cntj (57)',
-                'tknk'
-            ),
-            SolutionExample::of(
-                'pbga (66)
-havc (66) -> aaaa, bbbb
-ktlj (57)
-fwft (72) -> ktlj, cntj
-qoyq (66) -> cccc
-padx (45) -> pbga, havc, qoyq
-tknk (41) -> ugml, padx, fwft
-ugml (68) -> gyxo
-gyxo (61)
-aaaa (1)
-bbbb (2)
-cccc (3)
-zzzz (4) -> tknk
-cntj (57)',
-                'zzzz'
-            ),
-        ];
+cntj (57)
+...then you would be able to recreate the structure of the towers that looks like this:
+
+gyxo
+/
+ugml - ebii
+/      \
+|         jptl
+|
+|         pbga
+/        /
+tknk --- padx - havc
+\        \
+|         qoyq
+|
+|         ktlj
+\      /
+fwft - cntj
+\
+xhth
+In this example, tknk is at the bottom of the tower (the bottom program), and is holding up ugml, padx, and fwft. Those programs are, in turn, holding up other programs; in this example, none of those programs are holding up any other programs, and are all the tops of their own towers. (The actual tower balancing in front of you is much larger.)
+
+Before you're ready to help them, you need to make sure your information is correct. What is the name of the bottom program?
+
+To begin, get your puzzle input.
+
+Your puzzle answer was vgzejbd.
+ */
+class Day07Part1Solver implements Solver
+{
+    /**
+     * @param string $input
+     *
+     * @return string
+     */
+    public function solve($input)
+    {
+        $nodes = $this->parseInput($input);
+
+        return $this->findRootNodeName($nodes);
     }
 
     /**
      * @param string $input
+     *
      * @return Node[]
-     * @throws \Exception
      */
     public function parseInput($input)
     {
@@ -72,11 +85,13 @@ cntj (57)',
             if (preg_match('/(\w+)\s\(([0-9]+)\)\s->\s(.+)/', $row, $matches)) {
                 $name = $matches[1];
                 $nodes[$name] = new Node($name, $matches[2], explode(', ', $matches[3]));
+
             } elseif (preg_match('/(\w+)\s\(([0-9]+)\)/', $row, $matches)) {
                 $name = $matches[1];
                 $nodes[$name] = new Node($name, $matches[2], []);
+
             } else {
-                throw new \Exception("Input parsing exception for row {$row}");
+                throw new RuntimeException("Input parsing exception for row {$row}");
             }
         }
         return $nodes;
@@ -84,8 +99,8 @@ cntj (57)',
 
     /**
      * @param Node[] $nodes
+     *
      * @return string
-     * @throws \Exception
      */
     public function findRootNodeName(array $nodes)
     {
@@ -106,6 +121,6 @@ cntj (57)',
             }
         }
 
-        throw new \Exception("No root node found");
+        throw new RuntimeException("No root node found");
     }
 }

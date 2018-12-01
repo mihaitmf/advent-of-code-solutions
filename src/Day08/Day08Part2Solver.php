@@ -1,21 +1,33 @@
 <?php
+
 namespace AdventOfCode2017\Day08;
 
-use AdventOfCode2017\Common\SolutionExample;
 use AdventOfCode2017\Common\Solver;
 
+/**
+http://adventofcode.com/2017/day/8
+
+--- Part Two ---
+
+To be safe, the CPU also needs to know the highest value held in any register during this process so that it can decide how much memory to allocate to these operations. For example, in the above instructions, the highest value ever held was 10 (in register c after the third instruction was evaluated).
+
+Although it hasn't changed, you can still get your puzzle input.
+
+Your puzzle answer was 7234.
+ */
 class Day08Part2Solver implements Solver
 {
     /** @var Day08Part1Solver */
     private $part1Solver;
 
-    public function __construct(Day08Part1Solver $part1Solver)
+    public function __construct()
     {
-        $this->part1Solver = $part1Solver;
+        $this->part1Solver = new Day08Part1Solver();
     }
 
     /**
      * @param string $input
+     *
      * @return string
      */
     public function solve($input)
@@ -42,22 +54,6 @@ class Day08Part2Solver implements Solver
             }
         }
 
-        return $maxRegisterValue;
-    }
-
-    /**
-     * @return SolutionExample[]
-     */
-    public function getExamples()
-    {
-        return [
-            SolutionExample::of(
-                'b inc 5 if a > 1
-a inc 1 if b < 5
-c dec -10 if a >= 1
-c inc -20 if c == 10',
-                '10'
-            ),
-        ];
+        return (string)$maxRegisterValue;
     }
 }
