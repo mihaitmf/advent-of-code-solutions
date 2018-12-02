@@ -20,11 +20,11 @@ class Day01Part2Examples implements ExamplesProvider
 +1',
                 '2'
             ),
-//            SolutionExample::of(
-//                '+1
-//-1',
-//                '0'
-//            ),
+            SolutionExample::of(
+                '+1
+-1',
+                '0'
+            ),
             SolutionExample::of(
                 '+3
 +3
