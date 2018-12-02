@@ -54,5 +54,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     adventofcode_config.vm.synced_folder ".", "/var/advent-of-code-solutions", create: true
 
     adventofcode_config.vm.provision "docker"
+
+    adventofcode_config.vm.provision "bootstrap", type: "shell", run: "once",
+                                     path: ".dev/provisioners/provision.sh"
   end
 end
