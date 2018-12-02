@@ -20,8 +20,10 @@ The solution runner requires three integer arguments:
     - the **year** of the event (2017 or 2018),
     - the **day** of the problem (from 1 to 25),
     - the **part** of the problem (1 or 2).
-
+    
 Example to run solution for the 2017 event, day 9, part 2: `php run.php 2017 9 2`
+
+The default runner arguments can also be defined in the `config.ini` file.
 
 ## How to add a new solution
 ### The pretty way
