@@ -47,10 +47,6 @@ class Day01Part2Solver implements Solver
 
         while (true) {
             foreach ($items as $i => $item) {
-                if (empty($item)) {
-                    continue;
-                }
-
                 $operator = $item[0];
                 $value = (int)substr($item, 1);
 

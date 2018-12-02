@@ -47,9 +47,6 @@ class Day01Part1Solver implements Solver
         $result = 0;
         $items = explode("\n", $input);
         foreach ($items as $item) {
-            if (empty($item)) {
-                continue;
-            }
             $operator = $item[0];
             $value = (int)substr($item, 1);
             switch ($operator) {
