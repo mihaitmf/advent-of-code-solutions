@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WORK_DIR=$(realpath $(dirname "$0")/../..)
+WORK_DIR=/var/advent-of-code-solutions
 
 # set working directory after vagrant ssh
 echo "cd $WORK_DIR" >> /home/vagrant/.bashrc
