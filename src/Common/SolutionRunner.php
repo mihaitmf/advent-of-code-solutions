@@ -7,15 +7,12 @@ use InvalidArgumentException;
 
 class SolutionRunner
 {
-    private static $INPUTS_DIRECTORY;
-
     /** @var DaysSolversMapper */
     private $mapper;
 
     public function __construct(DaysSolversMapper $mapper)
     {
         $this->mapper = $mapper;
-        self::$INPUTS_DIRECTORY = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "inputs";
     }
 
     /**
@@ -47,7 +44,7 @@ class SolutionRunner
 
         $this->runSolutionAgainstExamples($year, $day, $part, $solver);
 
-        $input = $this->getProblemInput($year, $day, $part);
+        $input = $this->getProblemInput($year, $day);
 
         return $solver->solve($input);
     }
@@ -82,24 +79,24 @@ class SolutionRunner
     /**
      * @param int $year
      * @param int $day
-     * @param int $part
      *
      * @return string
      * @throws InvalidArgumentException
      */
-    private function getProblemInput($year, $day, $part)
+    private function getProblemInput($year, $day)
     {
-        $inputFilename = $this->mapper->getInputFilename($year, $day, $part);
-        $inputFilePath = self::$INPUTS_DIRECTORY . DIRECTORY_SEPARATOR . $year . DIRECTORY_SEPARATOR . $inputFilename;
+        $projectRootDirectoryPath = dirname(dirname(__DIR__));
+        $inputFilePath = $this->mapper->getInputFilePath($year, $day);
+        $absoluteInputFilePath = $projectRootDirectoryPath . DIRECTORY_SEPARATOR . $inputFilePath;
 
-        if (!is_file($inputFilePath)) {
-            throw new InvalidArgumentException("Input file {$inputFilePath} not found");
+        if (!is_file($absoluteInputFilePath)) {
+            throw new InvalidArgumentException("Input file {$absoluteInputFilePath} not found");
         }
 
-        $input = file_get_contents($inputFilePath);
+        $input = file_get_contents($absoluteInputFilePath);
 
         if ($input === false) {
-            throw new InvalidArgumentException("Error reading input file {$inputFilePath}");
+            throw new InvalidArgumentException("Error reading input file {$absoluteInputFilePath}");
         }
 
         return trim($input);

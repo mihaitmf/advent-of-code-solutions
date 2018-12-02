@@ -27,11 +27,14 @@ The default runner arguments can also be defined in the `config.ini` file.
 
 ## How to add a new solution
 ### The pretty way
-In order to implement a new solution, one needs to create or modify in total 4 files:
-- First create a new directory for the "day" of the problem named "DayXX" under the `src` directory, where XX is the 2-digits number of the day. Example: `Day01`. Then, create a new implementation of the `Solver` interface. This will contain the code of the solution for the problem from the given *day* and *part*. Example: class `Day01Part1Solver`.
-- In the same directory create a new implementation of the `ExamplesProvider` interface which will give the pairs of sample input - output data used to test the solutions against. Usually the examples are provided in the description of the problem, so you can just copy those, or create your own ones. Example: class `Day01Part1Examples`.
-- Create a new file in the `inputs` directory and paste into it the input data for the problem. Usually the input is the same for both parts of the problem. Example input file name: `day01.txt`.
-- Finally, wire all the new classes together by updating the `DaysSolversMapper` class to map the new implementations to the *day* and *part* arguments. 
+In order to implement a new solution, one needs to create **3 files**.
+
+- First create a new directory for the **day** of the problem named *DayXX* under the `/src/EventYYYY/` directory, where *XX* is the 2-digit number of the day and *YYYY* is the 4-digit *year* of the event. Example: `/src/Event2017/Day01/`. 
+- Then, create a new implementation of the `Solver` interface which will contain the code of the solution. Each *part* of the problem from the given *day* has its own implementation. Example: class `Day01Part1Solver`.
+- In the same directory create a new implementation of the `ExamplesProvider` interface which will give the pairs of sample input-output data used to test the solutions against. Usually the examples are provided in the description of the problem, so you can just copy those, or create your own ones. Example: class `Day01Part1Examples`.
+- Create a new file in the `/inputs/YYYY` directory, where *YYYY* is the 4-digit *year* of the event, and paste into it the input data for the problem. Usually the input is the same for both parts of the problem for a given day. Example input file name: `day01.txt`.
+
+All the wiring of the implementation classes and mapping of the *year*, *day* and *part* arguments is done in the `DaysSolversMapper` class. If you don't want to follow the default structure and naming of the classes, just add an entry on the map in this class with your custom preferences.
 
 ### The fast way
 For the situations when we didn't have time to prepare the new classes for the next day's problem, there is a "Fast Solution" runner for "quick and dirty" coding :).
