@@ -12,14 +12,14 @@ foreach ($input as $i => $currentChar) {
 
 // single row input
 $items = parseItems($input);
-foreach ($items as $itemIndex => $item) {
+foreach ($items as $i => $item) {
     $item;
 }
 
 // single column input
-$rows = parseRows($input);
-foreach ($rows as $rowIndex => $row) {
-    $row;
+$items = parseRows($input);
+foreach ($items as $i => $item) {
+    $item;
 }
 
 // matrix input

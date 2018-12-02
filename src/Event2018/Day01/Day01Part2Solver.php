@@ -33,6 +33,14 @@ Your puzzle answer was 66932.
  */
 class Day01Part2Solver implements Solver
 {
+    /** @var Day01Part1Solver */
+    private $part1Solver;
+
+    public function __construct(Day01Part1Solver $part1Solver)
+    {
+        $this->part1Solver = $part1Solver;
+    }
+
     /**
      * @param string $input
      *
@@ -40,28 +48,18 @@ class Day01Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $currentResult = 0;
-        $items = explode("\n", $input);
-
         $results = [];
+        $currentResult = 0;
+        $results[$currentResult] = 1;
+
+        $items = explode("\n", $input);
 
         while (true) {
             foreach ($items as $i => $item) {
-                if (empty($item)) {
-                    continue;
-                }
-
                 $operator = $item[0];
                 $value = (int)substr($item, 1);
 
-                switch ($operator) {
-                    case "+":
-                        $currentResult += $value;
-                        break;
-                    case "-":
-                        $currentResult -= $value;
-                        break;
-                }
+                $currentResult = $this->part1Solver->doOperation($operator, $value, $currentResult);
 
                 if (array_key_exists($currentResult, $results)) {
                     return (string)$currentResult;

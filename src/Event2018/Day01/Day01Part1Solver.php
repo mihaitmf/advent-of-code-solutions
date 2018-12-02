@@ -3,6 +3,7 @@
 namespace AdventOfCode\Event2018\Day01;
 
 use AdventOfCode\Common\Solver;
+use RuntimeException;
 
 /**
  * http://adventofcode.com/2018/day/1
@@ -46,22 +47,39 @@ class Day01Part1Solver implements Solver
     {
         $result = 0;
         $items = explode("\n", $input);
+
         foreach ($items as $item) {
-            if (empty($item)) {
-                continue;
-            }
             $operator = $item[0];
             $value = (int)substr($item, 1);
-            switch ($operator) {
-                case "+":
-                    $result += $value;
-                    break;
-                case "-":
-                    $result -= $value;
-                    break;
-            }
+
+            $result = $this->doOperation($operator, $value, $result);
         }
 
         return (string)$result;
+    }
+
+    /**
+     * @param string $operator
+     * @param int $value
+     * @param int $result
+     *
+     * @return int
+     */
+    public function doOperation($operator, $value, $result)
+    {
+        switch ($operator) {
+            case "+":
+                $result += $value;
+                break;
+
+            case "-":
+                $result -= $value;
+                break;
+
+            default:
+                throw new RuntimeException("Unknown operator \"{$operator}\"");
+        }
+
+        return $result;
     }
 }

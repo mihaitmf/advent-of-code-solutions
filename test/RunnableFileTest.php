@@ -60,7 +60,7 @@ class RunnableFileTest extends TestCase
 
     /**
      * @param string $dayParentDirectoryPath
-     * @param array $knownForFailingSolvers
+     * @param string[] $knownForFailingSolvers
      *
      * @return array
      */

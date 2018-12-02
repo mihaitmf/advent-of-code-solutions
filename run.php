@@ -1,6 +1,6 @@
 <?php
 
-use AdventOfCode\Common\DaysSolversMapper;
+use AdventOfCode\Common\Container;
 use AdventOfCode\Common\SolutionRunner;
 
 require_once "bootstrap.php";
@@ -26,7 +26,7 @@ if ($argc === 4) {
 }
 
 try {
-    $output = (new SolutionRunner(new DaysSolversMapper()))->run($year, $day, $part);
+    $output = Container::get(SolutionRunner::class)->run($year, $day, $part);
 } catch (\Exception $exception) {
     $output = $exception->getMessage();
 }

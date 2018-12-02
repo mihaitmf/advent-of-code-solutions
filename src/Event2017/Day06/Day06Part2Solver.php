@@ -25,9 +25,9 @@ class Day06Part2Solver implements Solver
     /** @var Day06Part1Solver */
     private $part1Solver;
 
-    public function __construct()
+    public function __construct(Day06Part1Solver $part1Solver)
     {
-        $this->part1Solver = new Day06Part1Solver();
+        $this->part1Solver = $part1Solver;
     }
 
     /**
