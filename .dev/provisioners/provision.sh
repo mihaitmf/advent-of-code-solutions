@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+WORK_DIR=$(realpath $(dirname "$0")/../..)
+
 # set working directory after vagrant ssh
-WORK_DIR=/var/advent-of-code-solutions
 echo "cd $WORK_DIR" >> /home/vagrant/.bashrc
 
 # build docker image
