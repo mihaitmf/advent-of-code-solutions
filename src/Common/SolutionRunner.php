@@ -40,7 +40,7 @@ class SolutionRunner
         $solverClass = $this->mapper->getSolverClassname($year, $day, $part);
 
         /** @var Solver $solver */
-        $solver = new $solverClass();
+        $solver = Container::get($solverClass);
 
         $this->runSolutionAgainstExamples($year, $day, $part, $solver);
 
@@ -63,7 +63,7 @@ class SolutionRunner
         $examplesProviderClass = $this->mapper->getExamplesProviderClassname($year, $day, $part);
 
         /** @var ExamplesProvider $examplesProvider */
-        $examplesProvider = new $examplesProviderClass();
+        $examplesProvider = Container::get($examplesProviderClass);
 
         foreach ($examplesProvider->getExamples() as $index => $example) {
             $solverOutput = $solver->solve($example->getInput());

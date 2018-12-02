@@ -2,7 +2,7 @@
 
 namespace AdventOfCode\Tests\Common;
 
-use AdventOfCode\Common\DaysSolversMapper;
+use AdventOfCode\Common\Container;
 use AdventOfCode\Common\SolutionRunner;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ class SolutionRunnerIntegrationTest extends TestCase
 
     protected function setUp()
     {
-        $this->solutionRunner = new SolutionRunner(new DaysSolversMapper());
+        $this->solutionRunner = Container::get(SolutionRunner::class);
     }
 
     /**
