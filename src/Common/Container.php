@@ -53,6 +53,7 @@ class Container
     private static function buildContainer()
     {
         $containerBuilder = new ContainerBuilder();
+        $containerBuilder->useAnnotations(true);
         $containerBuilder->setDefinitionCache(new ArrayCache());
 
         return $containerBuilder->build();
