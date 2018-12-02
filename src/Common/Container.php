@@ -32,7 +32,7 @@ class Container
 
     /**
      * @param string $name
-     * @param array $parameters
+     * @param array $parameters Map<string, string> = <parameterName => className>
      *
      * @return mixed
      * @throws \DI\DependencyException
