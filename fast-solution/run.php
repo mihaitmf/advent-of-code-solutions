@@ -1,12 +1,13 @@
 <?php
 
 $input = trim(file_get_contents("input.txt"));
-$result = "";
 $result = solve($input);
 print($result);
 
 function solve($input)
 {
+    return "";
+
     // single column input (multiple rows with a single value)
     $items = parseRows($input);
     foreach ($items as $i => $item) {
@@ -41,8 +42,12 @@ function parseRows($input) {
     return explode("\n", $input);
 }
 
-function parseItems($input) {
+function parseItemsByTab($input) {
     return explode("\t", $input);
+}
+
+function parseItemsBySpace($input) {
+    return explode(" ", $input);
 }
 
 function parseMatrix($input) {
