@@ -17,7 +17,7 @@ class SolutionRunnerIntegrationTest extends TestCase
     }
 
     /**
-     * @dataProvider providerSolutions
+     * @dataProvider providerSolutions2017Event
      */
     public function testRunSolutionsExpectedOutputFor2017Event($day, $part, $expectedResult)
     {
@@ -26,7 +26,7 @@ class SolutionRunnerIntegrationTest extends TestCase
         $this->assertSame($expectedResult, $actualResult, "The solution runner returned a different result");
     }
 
-    public function providerSolutions()
+    public function providerSolutions2017Event()
     {
         return [
             "Day 01 Part 1" => [1, 1, "1251"],
@@ -45,6 +45,24 @@ class SolutionRunnerIntegrationTest extends TestCase
             "Day 07 Part 2" => [7, 2, "1226"],
             "Day 08 Part 1" => [8, 1, "6828"],
             "Day 08 Part 2" => [8, 2, "7234"],
+        ];
+    }
+
+    /**
+     * @dataProvider providerSolutions2018Event
+     */
+    public function testRunSolutionsExpectedOutputFor2018Event($day, $part, $expectedResult)
+    {
+        $actualResult = $this->solutionRunner->run(2018, $day, $part);
+
+        $this->assertSame($expectedResult, $actualResult, "The solution runner returned a different result");
+    }
+
+    public function providerSolutions2018Event()
+    {
+        return [
+            "Day 01 Part 1" => [1, 1, "472"],
+            "Day 01 Part 2" => [1, 2, "66932"],
         ];
     }
 }

@@ -31,9 +31,31 @@ class RunnableFileTest extends TestCase
 
         $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2017";
 
-        $dataProviderArray = $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
+        return $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
+    }
 
-        return $dataProviderArray;
+    /**
+     * @dataProvider providerImplementedSolutionsFor2018Event
+     */
+    public function testRunFilePrintsLessThan10CharactersFor2018Event($day, $part)
+    {
+        $runnerFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
+
+        $output = shell_exec("php {$runnerFilePath} 2018 {$day} {$part}");
+
+        $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
+            . "\nRunning for Day {$day}, Part {$part}"
+            . "\nOutput: {$output}";
+
+        $this->assertLessThan(10, strlen($output), $errorMessage);
+    }
+
+    public function providerImplementedSolutionsFor2018Event()
+    {
+        $knownForFailingSolvers = [];
+        $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2018";
+
+        return $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
     }
 
     /**
