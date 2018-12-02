@@ -2,7 +2,9 @@
 
 namespace AdventOfCode\Event2018\Day01;
 
+use AdventOfCode\Common\InputParser;
 use AdventOfCode\Common\Solver;
+use DI\Annotation\Inject;
 
 /**
  * http://adventofcode.com/2018/day/1
@@ -33,13 +35,17 @@ Your puzzle answer was 66932.
  */
 class Day01Part2Solver implements Solver
 {
-    /** @var Day01Part1Solver */
-    private $part1Solver;
+    /**
+     * @Inject
+     * @var InputParser
+     */
+    private $inputParser;
 
-    public function __construct(Day01Part1Solver $part1Solver)
-    {
-        $this->part1Solver = $part1Solver;
-    }
+    /**
+     * @Inject
+     * @var Day01Part1Solver
+     */
+    private $part1Solver;
 
     /**
      * @param string $input
@@ -52,7 +58,7 @@ class Day01Part2Solver implements Solver
         $currentResult = 0;
         $results[$currentResult] = 1;
 
-        $items = explode("\n", $input);
+        $items = $this->inputParser->parseRows($input);
 
         while (true) {
             foreach ($items as $i => $item) {
