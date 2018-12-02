@@ -39,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "advent-of-code-solutions", primary: true do |adventofcode_config|
     adventofcode_config.vm.box = "ubuntu/xenial64"
     adventofcode_config.vm.box_check_update = true
-    adventofcode_config.vm.network "private_network", ip: "192.168.10.10"
+    adventofcode_config.vm.network "private_network", ip: "192.168.30.11"
     adventofcode_config.vm.provider "virtualbox" do |vb|
       vb.name = "advent-of-code-solutions-VM"
       vb.cpus = 2
