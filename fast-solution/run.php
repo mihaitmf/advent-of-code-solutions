@@ -55,7 +55,7 @@ function parseMatrix($input) {
     $rows = parseRows($input);
 
     foreach ($rows as $row) {
-        $matrix[] = parseItems($row);
+        $matrix[] = parseItemsByTab($row);
     }
 
     return $matrix;
