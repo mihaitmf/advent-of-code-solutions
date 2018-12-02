@@ -3,7 +3,7 @@
 COMMAND="$@"
 IMAGE_NAME="advent-of-code/php:latest"
 
-HOST_WORK_DIR=/var/advent-of-code-solutions
+HOST_WORK_DIR=$(realpath $(dirname "$0"))
 CONTAINER_WORK_DIR=/advent-of-code-solutions
 HOST_CONFIG_FILE_PATH=${HOST_WORK_DIR}/dev/config/custom-php.ini
 CONTAINER_CONFIG_FILE_PATH=/usr/local/etc/php/conf.d/custom-php.ini
