@@ -10,17 +10,11 @@ class RunnableFileTest extends TestCase
     /**
      * @dataProvider providerImplementedSolutionsFor2017Event
      */
-    public function testRunFilePrintsLessThan10CharactersFor2017Event($day, $part)
+    public function testRunFileDoesNotPrintErrorFor2017Event($day, $part)
     {
-        $runnerFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
+        $output = $this->executeRunnerCommand(2017, $day, $part, $this->getRunnerFilePath());
 
-        $output = shell_exec("php {$runnerFilePath} 2017 {$day} {$part}");
-
-        $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
-            . "\nRunning for Day {$day}, Part {$part}"
-            . "\nOutput: {$output}";
-
-        $this->assertLessThan(10, strlen($output), $errorMessage);
+        $this->assertNotErrorOutput(2017, $day, $part, $output);
     }
 
     public function providerImplementedSolutionsFor2017Event()
@@ -37,17 +31,11 @@ class RunnableFileTest extends TestCase
     /**
      * @dataProvider providerImplementedSolutionsFor2018Event
      */
-    public function testRunFilePrintsLessThan10CharactersFor2018Event($day, $part)
+    public function testRunFileDoesNotPrintErrorFor2018Event($day, $part)
     {
-        $runnerFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
+        $output = $this->executeRunnerCommand(2018, $day, $part, $this->getRunnerFilePath());
 
-        $output = shell_exec("php {$runnerFilePath} 2018 {$day} {$part}");
-
-        $errorMessage = "Output was bigger than 10 characters which most likely means it was an error."
-            . "\nRunning for Day {$day}, Part {$part}"
-            . "\nOutput: {$output}";
-
-        $this->assertLessThan(10, strlen($output), $errorMessage);
+        $this->assertNotErrorOutput(2018, $day, $part, $output);
     }
 
     public function providerImplementedSolutionsFor2018Event()
@@ -85,7 +73,8 @@ class RunnableFileTest extends TestCase
                     ) {
                         $partAsInt = (int)$matches[1];
                         $dayNumberAsInt = (int)$dayNumberString;
-                        $dataProviderArray["running solution for Day {$dayNumberAsInt} Part {$partAsInt}"] = [$dayNumberAsInt, $partAsInt];
+                        $dataProviderArray["running solution for Day {$dayNumberAsInt} Part {$partAsInt}"] =
+                            [$dayNumberAsInt, $partAsInt];
                     }
                 }
 
@@ -93,5 +82,58 @@ class RunnableFileTest extends TestCase
         }
 
         return $dataProviderArray;
+    }
+
+    /**
+     * @return string
+     */
+    private function getRunnerFilePath()
+    {
+        return dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
+    }
+
+    /**
+     * @param int $year
+     * @param int $day
+     * @param int $part
+     * @param string $runnerFilePath
+     *
+     * @return string
+     */
+    private function executeRunnerCommand($year, $day, $part, $runnerFilePath)
+    {
+        return shell_exec(sprintf("php %s %d %d %d", $runnerFilePath, $year, $day, $part));
+    }
+
+    /**
+     * @param int $year
+     * @param int $day
+     * @param int $part
+     * @param string $output
+     *
+     * @return void
+     */
+    private function assertNotErrorOutput($year, $day, $part, $output)
+    {
+        $errorMessage = $this->getCommonErrorMessage($year, $day, $part, $output);
+
+        $this->assertGreaterThan(1, strlen($output), $errorMessage);
+        $this->assertSame(0, substr_count($output, "\n"), $errorMessage);
+        $this->assertLessThan(30, strlen($output), $errorMessage);
+    }
+
+    /**
+     * @param int $year
+     * @param int $day
+     * @param int $part
+     * @param string $output
+     *
+     * @return string
+     */
+    private function getCommonErrorMessage($year, $day, $part, $output)
+    {
+        return "Output was empty or bigger than expected which most likely means it was an error."
+            . "\nRunning problem for Event {$year}, Day {$day}, Part {$part}"
+            . "\nOutput: {$output}";
     }
 }
