@@ -3,7 +3,7 @@
 use AdventOfCode\Common\Container;
 use AdventOfCode\Common\SolutionRunner;
 
-require_once "bootstrap.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 $configFile = "config.ini";
 

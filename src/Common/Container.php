@@ -23,11 +23,7 @@ class Container
      */
     public static function get($name)
     {
-        if (self::$container === null) {
-            self::$container = self::buildContainer();
-        }
-
-        return self::$container->get($name);
+        return self::getContainer()->get($name);
     }
 
     /**
@@ -40,11 +36,19 @@ class Container
      */
     public static function make($name, array $parameters = [])
     {
+        return self::getContainer()->make($name, $parameters);
+    }
+
+    /**
+     * @return \DI\Container
+     */
+    private static function getContainer()
+    {
         if (self::$container === null) {
             self::$container = self::buildContainer();
         }
 
-        return self::$container->make($name, $parameters);
+        return self::$container;
     }
 
     /**
@@ -53,6 +57,7 @@ class Container
     private static function buildContainer()
     {
         $containerBuilder = new ContainerBuilder();
+        $containerBuilder->useAnnotations(true);
         $containerBuilder->setDefinitionCache(new ArrayCache());
 
         return $containerBuilder->build();

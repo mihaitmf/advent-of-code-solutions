@@ -1,15 +1,22 @@
 <?php
 
+use AdventOfCode\Common\Container;
+use AdventOfCode\Common\InputParser;
+
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
+
 $input = trim(file_get_contents("input.txt"));
 $result = solve($input);
 print($result);
 
 function solve($input)
 {
+    $inputParser = Container::get(InputParser::class);
+
     return "";
 
     // single column input (multiple rows with a single value)
-    $items = parseRows($input);
+    $items = $inputParser->parseRows($input);
     foreach ($items as $i => $item) {
         $item;
     }
@@ -21,42 +28,19 @@ function solve($input)
     }
 
     // single row input
-    $items = parseItems($input);
+    $items = $inputParser->parseItemsByTab($input);
     foreach ($items as $i => $item) {
         $item;
     }
 
     // matrix input
-    $matrix = parseMatrix($input);
-    $rows = parseRows($input);
+    $matrix = $inputParser->parseMatrix($input);
+    $rows = $inputParser->parseRows($input);
     foreach ($rows as $rowIndex => $row) {
-        $items = parseItems($row);
+        $items = $inputParser->parseItemsByTab($row);
 
         foreach ($items as $itemIndex => $item) {
             $item;
         }
     }
-}
-
-function parseRows($input) {
-    return explode("\n", $input);
-}
-
-function parseItemsByTab($input) {
-    return explode("\t", $input);
-}
-
-function parseItemsBySpace($input) {
-    return explode(" ", $input);
-}
-
-function parseMatrix($input) {
-    $matrix = [];
-    $rows = parseRows($input);
-
-    foreach ($rows as $row) {
-        $matrix[] = parseItems($row);
-    }
-
-    return $matrix;
 }
