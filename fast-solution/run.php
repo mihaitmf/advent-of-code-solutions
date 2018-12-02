@@ -11,7 +11,6 @@ print($result);
 
 function solve($input)
 {
-    /** @var InputParser $inputParser */
     $inputParser = Container::get(InputParser::class);
 
     return "";
