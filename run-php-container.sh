@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-COMMAND="$@"
 IMAGE_NAME="advent-of-code/php:latest"
 
 HOST_WORK_DIR=$(realpath $(dirname $(readlink -f "$0")))
@@ -17,7 +16,8 @@ docker run --rm \
     --volume ${HOST_CONFIG_FILE_PATH}:${CONTAINER_CONFIG_FILE_PATH} \
     --env "XDEBUG_STATUS=$XDEBUG_STATUS" \
     --env "XDEBUG_HOST=$XDEBUG_HOST" \
-    ${IMAGE_NAME} "$COMMAND"
+    --env-file "${HOST_WORK_DIR}/dev/config/settings.env" \
+    ${IMAGE_NAME} "$@"
 
 ## Use this to debug inside the container
 #docker run -it --entrypoint bash \
