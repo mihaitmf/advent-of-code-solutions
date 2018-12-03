@@ -9,7 +9,7 @@ HOST_CONFIG_FILE_PATH=${HOST_WORK_DIR}/dev/config/custom-php.ini
 CONTAINER_CONFIG_FILE_PATH=/usr/local/etc/php/conf.d/custom-php.ini
 
 XDEBUG_STATUS=1 # enable XDebug by default
-XDEBUG_HOST="192.168.30.11"
+XDEBUG_HOST="192.168.30.1"
 
 docker run --rm \
     --workdir ${CONTAINER_WORK_DIR} \
