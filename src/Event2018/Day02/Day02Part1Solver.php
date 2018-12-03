@@ -2,7 +2,9 @@
 
 namespace AdventOfCode\Event2018\Day02;
 
+use AdventOfCode\Common\InputParser;
 use AdventOfCode\Common\Solver;
+use DI\Annotation\Inject;
 
 /**
  * http://adventofcode.com/2018/day/2
@@ -36,13 +38,19 @@ Your puzzle answer was 8296.
 class Day02Part1Solver implements Solver
 {
     /**
+     * @Inject
+     * @var InputParser
+     */
+    private $inputParser;
+
+    /**
      * @param string $input
      *
      * @return string
      */
     public function solve($input)
     {
-        $items = explode("\n", $input);
+        $items = $this->inputParser->parseRows($input);
 
         $countItemsWith2Duplicates = 0;
         $countItemsWith3Duplicates = 0;

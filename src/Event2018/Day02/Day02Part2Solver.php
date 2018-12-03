@@ -2,7 +2,9 @@
 
 namespace AdventOfCode\Event2018\Day02;
 
+use AdventOfCode\Common\InputParser;
 use AdventOfCode\Common\Solver;
+use DI\Annotation\Inject;
 use RuntimeException;
 
 /**
@@ -29,13 +31,19 @@ Your puzzle answer was pazvmqbftrbeosiecxlghkwud.
 class Day02Part2Solver implements Solver
 {
     /**
+     * @Inject
+     * @var InputParser
+     */
+    private $inputParser;
+
+    /**
      * @param string $input
      *
      * @return string
      */
     public function solve($input)
     {
-        $items = explode("\n", $input);
+        $items = $this->inputParser->parseRows($input);
         $itemsCount = count($items);
 
         for ($i = 0; $i < $itemsCount - 1; $i++) {
