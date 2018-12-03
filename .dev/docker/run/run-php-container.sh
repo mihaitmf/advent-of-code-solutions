@@ -3,7 +3,7 @@
 IMAGE_NAME="advent-of-code/php:latest"
 
 # needed to sync working directory
-HOST_WORK_DIR=$(realpath $(dirname $(readlink -f "$0"))/../..)
+HOST_WORK_DIR=$(realpath $(dirname $(readlink -f "$0"))/../../..)
 CONTAINER_WORK_DIR=${HOST_WORK_DIR}
 
 # needed to sync php config file
