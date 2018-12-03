@@ -5,7 +5,7 @@ use AdventOfCode\Common\InputParser;
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
-$input = trim(file_get_contents("input.txt"));
+$input = trim(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "input.txt"));
 $result = solve($input);
 print($result);
 
