@@ -44,8 +44,8 @@ class Day02Part1Solver implements Solver
     {
         $items = explode("\n", $input);
 
-        $with2Repetitions = 0;
-        $with3Repetitions = 0;
+        $countItemsWith2Duplicates = 0;
+        $countItemsWith3Duplicates = 0;
 
         foreach ($items as $item) {
             $item = str_split($item);
@@ -59,23 +59,23 @@ class Day02Part1Solver implements Solver
                 }
             }
 
-            $found2Count = false;
-            $found3Count = false;
+            $foundCharWithCount2 = false;
+            $foundCharWithCount3 = false;
             foreach ($visitedCharCount as $count) {
-                if (!$found2Count && $count === 2) {
-                    $found2Count = true;
-                    $with2Repetitions++;
+                if (!$foundCharWithCount2 && $count === 2) {
+                    $foundCharWithCount2 = true;
+                    $countItemsWith2Duplicates++;
                 }
-                if (!$found3Count && $count === 3) {
-                    $found3Count = true;
-                    $with3Repetitions++;
+                if (!$foundCharWithCount3 && $count === 3) {
+                    $foundCharWithCount3 = true;
+                    $countItemsWith3Duplicates++;
                 }
-                if ($found2Count && $found3Count) {
+                if ($foundCharWithCount2 && $foundCharWithCount3) {
                     break;
                 }
             }
         }
 
-        return (string)($with2Repetitions * $with3Repetitions);
+        return (string)($countItemsWith2Duplicates * $countItemsWith3Duplicates);
     }
 }
