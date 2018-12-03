@@ -14,19 +14,13 @@ CONTAINER_CONFIG_FILE_PATH=/usr/local/etc/php/conf.d/custom-php.ini
 PHPSTORM_HELPERS_DIR=/home/vagrant/.phpstorm_helpers
 
 # needed for using XDebug from the IDE
-SETTINGS_ENV_FILE_PATH=${HOST_WORK_DIR}/.dev/docker/config/settings.env
-
-# enable XDebug by default
-XDEBUG_STATUS=1
-XDEBUG_HOST="192.168.30.1"
+SETTINGS_ENV_FILE_PATH=${HOST_WORK_DIR}/.dev/docker/config/xdebug_settings.env
 
 docker run --rm \
     --workdir ${CONTAINER_WORK_DIR} \
     --volume ${HOST_WORK_DIR}:${CONTAINER_WORK_DIR} \
     --volume ${HOST_CONFIG_FILE_PATH}:${CONTAINER_CONFIG_FILE_PATH} \
     --volume ${PHPSTORM_HELPERS_DIR}:${PHPSTORM_HELPERS_DIR} \
-    --env "XDEBUG_STATUS=$XDEBUG_STATUS" \
-    --env "XDEBUG_HOST=$XDEBUG_HOST" \
     --env-file ${SETTINGS_ENV_FILE_PATH} \
     ${IMAGE_NAME} "$@"
 
@@ -36,7 +30,5 @@ docker run --rm \
 #    --volume ${HOST_WORK_DIR}:${CONTAINER_WORK_DIR} \
 #    --volume ${HOST_CONFIG_FILE_PATH}:${CONTAINER_CONFIG_FILE_PATH} \
 #    --volume ${PHPSTORM_HELPERS_DIR}:${PHPSTORM_HELPERS_DIR} \
-#    --env "XDEBUG_STATUS=$XDEBUG_STATUS" \
-#    --env "XDEBUG_HOST=$XDEBUG_HOST" \
 #    --env-file ${SETTINGS_ENV_FILE_PATH} \
 #    ${IMAGE_NAME}
