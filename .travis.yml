@@ -1,8 +1,8 @@
 language: php
 
 php:
-  - 5.5
   - 7.2
+  - 5.5
 
 env:
   - TEST_SUITE=tests
@@ -10,7 +10,7 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    - php: 7.2
+    - php: 5.5
 
 install:
   - composer install

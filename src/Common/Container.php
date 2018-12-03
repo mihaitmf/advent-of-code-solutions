@@ -2,7 +2,6 @@
 
 namespace AdventOfCode\Common;
 
-use DI\Cache\ArrayCache;
 use DI\ContainerBuilder;
 
 class Container
@@ -58,7 +57,6 @@ class Container
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->useAnnotations(true);
-        $containerBuilder->setDefinitionCache(new ArrayCache());
 
         return $containerBuilder->build();
     }
