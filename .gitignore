@@ -2,3 +2,4 @@
 /.idea/
 /config.ini
 /.vagrant/
+/.composer-cache/
