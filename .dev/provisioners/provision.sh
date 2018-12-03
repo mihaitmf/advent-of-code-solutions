@@ -15,5 +15,6 @@ chown vagrant:vagrant /home/vagrant/.phpstorm_helpers
 # build docker images
 ${WORK_DIR}/.dev/docker/build/build-all.sh
 
-# run composer install
-${WORK_DIR}/.dev/docker/run/run-composer-container.sh install
+# add composer command and run composer install
+ln --force --symbolic ${WORK_DIR}/.dev/docker/run/run-composer-container.sh /usr/bin/composer
+composer install

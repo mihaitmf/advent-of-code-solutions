@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_DIR=$(realpath $(dirname "$0")/../../..)
+PROJECT_DIR=$(realpath $(dirname $(readlink -f "$0"))/../../..)
 
 docker run --rm \
     --workdir ${PROJECT_DIR} \
