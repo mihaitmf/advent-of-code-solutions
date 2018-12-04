@@ -117,9 +117,8 @@ class RunnableFileTest extends TestCase
     {
         $errorMessage = $this->getCommonErrorMessage($year, $day, $part, $output);
 
-        $this->assertGreaterThan(1, strlen($output), $errorMessage);
-        $this->assertSame(0, substr_count($output, "\n"), $errorMessage);
-        $this->assertLessThan(30, strlen($output), $errorMessage);
+        $matchResult = preg_match("/^Result is: \w+\n/", $output);
+        $this->assertSame(1, $matchResult, $errorMessage);
     }
 
     /**
@@ -132,7 +131,7 @@ class RunnableFileTest extends TestCase
      */
     private function getCommonErrorMessage($year, $day, $part, $output)
     {
-        return "Output was empty or bigger than expected which most likely means it was an error."
+        return "Output was most likely an error."
             . "\nRunning problem for Event {$year}, Day {$day}, Part {$part}"
             . "\nOutput: {$output}";
     }
