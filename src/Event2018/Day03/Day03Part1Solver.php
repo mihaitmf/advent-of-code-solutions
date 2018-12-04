@@ -109,7 +109,7 @@ class Day03Part1Solver implements Solver
      *
      * @return ClaimMatrix
      */
-    private function parseClaimMatrix($item)
+    public function parseClaimMatrix($item)
     {
         $matches = [];
         $matchResult = preg_match("/^#(\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)$/", $item, $matches);
