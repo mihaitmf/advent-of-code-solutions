@@ -4,7 +4,6 @@ namespace AdventOfCode\Event2018\Day02;
 
 use AdventOfCode\Common\InputParser;
 use AdventOfCode\Common\Solver;
-use DI\Annotation\Inject;
 use RuntimeException;
 
 /**
