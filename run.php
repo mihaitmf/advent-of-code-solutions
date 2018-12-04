@@ -3,6 +3,8 @@
 use AdventOfCode\Common\Container;
 use AdventOfCode\Common\SolutionRunner;
 
+$startTime = microtime(true);
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 $configFile = "config.ini";
@@ -27,8 +29,10 @@ if ($argc === 4) {
 
 try {
     $output = Container::get(SolutionRunner::class)->run($year, $day, $part);
+    print("Result is: {$output}");
+
 } catch (\Exception $exception) {
-    $output = $exception->getMessage();
+    print("Exception: {$exception->getMessage()}");
 }
 
-print($output);
+print(sprintf("\n\nExecution time: %.4f seconds\n", microtime(true) - $startTime));
