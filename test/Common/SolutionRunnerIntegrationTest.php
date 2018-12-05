@@ -70,6 +70,7 @@ class SolutionRunnerIntegrationTest extends TestCase
             "Day 04 Part 1" => [4, 1, "48680"],
             "Day 04 Part 2" => [4, 2, "94826"],
             "Day 05 Part 1" => [5, 1, "11476"],
+            "Day 05 Part 2" => [5, 2, "5446"],
         ];
     }
 }
