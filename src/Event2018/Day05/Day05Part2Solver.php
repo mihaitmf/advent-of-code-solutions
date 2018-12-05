@@ -46,14 +46,15 @@ class Day05Part2Solver implements Solver
 
             for ($i = 0; $i < $inputLength; $i++) {
                 $currentElement = $input[$i];
+                $currentELementLowerCase = strtolower($currentElement);
 
-                if (strtolower($currentElement) === strtolower($ignoredElement)) {
+                if ($currentELementLowerCase === $ignoredElement) {
                     continue;
                 }
 
-                if (!$stack->isEmpty()
+                if ($stack->count() !== 0
                     && $stack->top() !== $currentElement
-                    && strtolower($stack->top()) === strtolower($currentElement)
+                    && strtolower($stack->top()) === $currentELementLowerCase
                 ) {
                     $stack->pop();
 
@@ -62,10 +63,11 @@ class Day05Part2Solver implements Solver
                 }
             }
 
+            $currentStackCount = $stack->count();
             if ($minStackCount === null) {
-                $minStackCount = $stack->count();
+                $minStackCount = $currentStackCount;
             } else {
-                $minStackCount = min($minStackCount, $stack->count());
+                $minStackCount = min($minStackCount, $currentStackCount);
             }
         }
 
