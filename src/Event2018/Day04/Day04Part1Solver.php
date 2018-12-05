@@ -79,26 +79,17 @@ class Day04Part1Solver implements Solver
     {
         $items = $this->inputParser->parseRows($input);
 
-        $itemsByDate = [];
-
-        foreach ($items as $item) {
-            $matches = [];
-            $matchResult = preg_match("/^\[\d{4}-(\d+-\d+ \d\d:\d\d)\] (.*)/", $item, $matches);
-            if ($matchResult !== 1) {
-                throw new RuntimeException("Could not parse input");
-            }
-
-            $itemsByDate[$matches[1]] = $matches[2];
-        }
-
-        ksort($itemsByDate);
+        $itemsByDate = $this->getSortedItemsByDateTime($items);
 
         $currentGuardId = 0;
         $fallAsleepMinute = 0;
-        $guardSleepCountPerMinute = [];
+
+        $guardSleepCount = [];
         $maxSleepCount = 0;
         $maxSleepCountGuardId = 0;
-        $guardSleepCount = [];
+
+        $guardSleepCountPerMinute = [];
+
         foreach ($itemsByDate as $dateTime => $item) {
             $matches = [];
             if (preg_match("/Guard #(\d+) begins shift/", $item, $matches) === 1) {
@@ -120,7 +111,7 @@ class Day04Part1Solver implements Solver
                     $maxSleepCountGuardId = $currentGuardId;
                 }
 
-                // increment the count for each minute slept
+                // increment the count for each minute asleep
                 if (!array_key_exists($currentGuardId, $guardSleepCountPerMinute)) {
                     $guardSleepCountPerMinute[$currentGuardId] = [];
                 }
@@ -152,7 +143,7 @@ class Day04Part1Solver implements Solver
      *
      * @return int
      */
-    private function parseMinute($dateTime)
+    public function parseMinute($dateTime)
     {
         $matches = [];
         if (preg_match("/\d\d-\d\d \d\d:(\d\d)/", $dateTime, $matches) === 1) {
@@ -160,5 +151,29 @@ class Day04Part1Solver implements Solver
         }
 
         throw new RuntimeException("Unable to parse minute from date");
+    }
+
+    /**
+     * @param string[] $items
+     *
+     * @return array Map<string, string>
+     */
+    public function getSortedItemsByDateTime(array $items)
+    {
+        $itemsByDate = [];
+
+        foreach ($items as $item) {
+            $matches = [];
+            $matchResult = preg_match("/^\[\d{4}-(\d+-\d+ \d\d:\d\d)\] (.*)/", $item, $matches);
+            if ($matchResult !== 1) {
+                throw new RuntimeException("Could not parse input");
+            }
+
+            $itemsByDate[$matches[1]] = $matches[2];
+        }
+
+        ksort($itemsByDate);
+
+        return $itemsByDate;
     }
 }
