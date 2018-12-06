@@ -42,7 +42,8 @@ class Day05Part2Solver implements Solver
 
         $minStackCount = null;
         foreach ($differentElements as $ignoredElement => $unimportantValue) {
-            $stack = new \SplStack();
+            $stack = [];
+            $stackSize = 0;
 
             for ($i = 0; $i < $inputLength; $i++) {
                 $currentElement = $input[$i];
@@ -52,22 +53,23 @@ class Day05Part2Solver implements Solver
                     continue;
                 }
 
-                if ($stack->count() !== 0
-                    && $stack->top() !== $currentElement
-                    && strtolower($stack->top()) === $currentELementLowerCase
+                if ($stackSize !== 0
+                    && ($stackTop = end($stack)) !== $currentElement
+                    && strtolower($stackTop) === strtolower($currentElement)
                 ) {
-                    $stack->pop();
+                    unset($stack[key($stack)]);
+                    $stackSize--;
 
                 } else {
-                    $stack->push($currentElement);
+                    $stack[] = $currentElement;
+                    $stackSize++;
                 }
             }
 
-            $currentStackCount = $stack->count();
             if ($minStackCount === null) {
-                $minStackCount = $currentStackCount;
+                $minStackCount = $stackSize;
             } else {
-                $minStackCount = min($minStackCount, $currentStackCount);
+                $minStackCount = min($minStackCount, $stackSize);
             }
         }
 
