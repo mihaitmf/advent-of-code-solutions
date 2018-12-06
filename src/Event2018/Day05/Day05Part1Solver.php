@@ -42,21 +42,24 @@ class Day05Part1Solver implements Solver
     public function solve($input)
     {
         $inputLength = strlen($input);
-        $stack = new \SplStack();
+        $stack = [];
+        $stackSize = 0;
 
         for ($i = 0; $i < $inputLength; $i++) {
             $currentElement = $input[$i];
-            if (!$stack->isEmpty()
-                && $stack->top() !== $currentElement
-                && strtolower($stack->top()) === strtolower($currentElement)
+            if ($stackSize !== 0
+                && ($stackTop = end($stack)) !== $currentElement
+                && strtolower($stackTop) === strtolower($currentElement)
             ) {
-                $stack->pop();
+                unset($stack[key($stack)]);
+                $stackSize--;
 
             } else {
-                $stack->push($currentElement);
+                $stack[] = $currentElement;
+                $stackSize++;
             }
         }
 
-        return (string)$stack->count();
+        return (string)$stackSize;
     }
 }
