@@ -3,6 +3,7 @@
 namespace AdventOfCode\Event2018\Day05;
 
 use AdventOfCode\Common\Solver;
+use DI\Annotation\Inject;
 
 /**
  * http://adventofcode.com/2018/day/5
@@ -27,6 +28,12 @@ Your puzzle answer was 5446.
 class Day05Part2Solver implements Solver
 {
     /**
+     * @Inject
+     * @var Day05Part1Solver
+     */
+    private $part1Solver;
+
+    /**
      * @param string $input
      *
      * @return string
@@ -41,30 +48,9 @@ class Day05Part2Solver implements Solver
         }
 
         $minStackCount = null;
+
         foreach ($differentElements as $ignoredElement => $unimportantValue) {
-            $stack = [];
-            $stackSize = 0;
-
-            for ($i = 0; $i < $inputLength; $i++) {
-                $currentElement = $input[$i];
-                $currentELementLowerCase = strtolower($currentElement);
-
-                if ($currentELementLowerCase === $ignoredElement) {
-                    continue;
-                }
-
-                if ($stackSize !== 0
-                    && ($stackTop = end($stack)) !== $currentElement
-                    && strtolower($stackTop) === strtolower($currentElement)
-                ) {
-                    unset($stack[key($stack)]);
-                    $stackSize--;
-
-                } else {
-                    $stack[] = $currentElement;
-                    $stackSize++;
-                }
-            }
+            $stackSize = $this->part1Solver->getStackSizeAfterReactions($input, $ignoredElement);
 
             if ($minStackCount === null) {
                 $minStackCount = $stackSize;

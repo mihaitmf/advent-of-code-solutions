@@ -41,15 +41,31 @@ class Day05Part1Solver implements Solver
      */
     public function solve($input)
     {
+        return (string) $this->getStackSizeAfterReactions($input);
+    }
+
+    /**
+     * @param string $input
+     * @param string|null $ignoredElement
+     *
+     * @return int
+     */
+    public function getStackSizeAfterReactions($input, $ignoredElement = null)
+    {
         $inputLength = strlen($input);
         $stack = [];
         $stackSize = 0;
 
         for ($i = 0; $i < $inputLength; $i++) {
             $currentElement = $input[$i];
+
+            if ($ignoredElement !== null && strcasecmp($currentElement, $ignoredElement) === 0) {
+                continue;
+            }
+
             if ($stackSize !== 0
                 && ($stackTop = end($stack)) !== $currentElement
-                && strtolower($stackTop) === strtolower($currentElement)
+                && strcasecmp($stackTop, $currentElement) === 0
             ) {
                 unset($stack[key($stack)]);
                 $stackSize--;
@@ -59,7 +75,6 @@ class Day05Part1Solver implements Solver
                 $stackSize++;
             }
         }
-
-        return (string)$stackSize;
-    }
+        return $stackSize;
+}
 }
