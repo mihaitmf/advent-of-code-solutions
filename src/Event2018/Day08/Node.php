@@ -10,6 +10,9 @@ class Node
     /** @var int */
     private $metadataCount;
 
+    /** @var array Map<int, int> = <childIndex, childValue> */
+    private $childrenValues = [];
+
     /**
      * @param int $childrenCount
      * @param int $metadataCount
@@ -42,5 +45,21 @@ class Node
     public function getMetadataCount()
     {
         return $this->metadataCount;
+    }
+
+    /**
+     * @param int $nodeValue
+     */
+    public function addChildValue($nodeValue)
+    {
+        $this->childrenValues[] = $nodeValue;
+    }
+
+    /**
+     * @return array Map<int, int> = <childIndex, childValue>
+     */
+    public function getChildrenValues()
+    {
+        return $this->childrenValues;
     }
 }
