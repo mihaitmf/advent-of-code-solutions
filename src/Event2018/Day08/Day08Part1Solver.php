@@ -60,30 +60,31 @@ class Day08Part1Solver implements Solver
     {
         $items = $this->inputParser->parseItemsBySpace($input);
 
-        ini_set('xdebug.max_nesting_level', 4000);
+        ini_set('xdebug.max_nesting_level', 5000);
 
-        return (string)$this->processStack($items, 1, (int)$items[0], (int)$items[1], [], 0);
+        return (string)$this->processStack(new Node((int)$items[0], (int)$items[1]), 1, $items, [], 0);
     }
 
     /**
-     * @param string[] $items
+     * @param Node $node
      * @param int $i
-     * @param int $nodeChildrenCount
-     * @param int $nodeMetadataCount
+     * @param string[] $items
      * @param Node[] $stack
      * @param int $metadataValuesSum
      *
      * @return int
      */
     private function processStack(
-        $items,
+        $node,
         $i,
-        $nodeChildrenCount,
-        $nodeMetadataCount,
+        $items,
         $stack,
         $metadataValuesSum
     ) {
-        if ($nodeChildrenCount === 0) {
+        // if we found all the node's children
+        if ($node->getChildrenCount() === 0) {
+            $nodeMetadataCount = $node->getMetadataCount();
+
             while ($nodeMetadataCount > 0) {
                 $metadataValuesSum += (int)$items[++$i];
                 $nodeMetadataCount--;
@@ -93,33 +94,42 @@ class Day08Part1Solver implements Solver
                 return $metadataValuesSum;
             }
 
-            $lastNode = array_pop($stack);
-            $lastNodeChildrenCount = $lastNode->getChildrenCount() - 1;
-            $lastNodeMetadataCount = $lastNode->getMetadataCount();
+            $parentNode = end($stack);
+            $parentNode->decrementChildrenCount();
 
-            return $this->processStack(
-                $items,
-                $i,
-                $lastNodeChildrenCount,
-                $lastNodeMetadataCount,
-                $stack,
-                $metadataValuesSum
-            );
+            // if we didn't find all the parent-node's children, move forward
+            if ($parentNode->getChildrenCount() > 0) {
+                return $this->processNextNode($i, $items, $stack, $metadataValuesSum);
+            }
 
-        } else {
-            $stack[] = new Node($nodeChildrenCount, $nodeMetadataCount);
-            $nodeChildrenCount = (int)$items[++$i];
-            $nodeMetadataCount = (int)$items[++$i];
+            // if we found all the parent-node's children, remove it from the stack
+            array_pop($stack);
 
-            return $this->processStack(
-                $items,
-                $i,
-                $nodeChildrenCount,
-                $nodeMetadataCount,
-                $stack,
-                $metadataValuesSum
-            );
-
+            return $this->processStack($parentNode, $i, $items, $stack, $metadataValuesSum);
         }
+
+        // we didn't find all the node's children, add it to stack
+        $stack[] = $node;
+
+        return $this->processNextNode($i, $items, $stack, $metadataValuesSum);
+    }
+
+    /**
+     * @param int $i
+     * @param string[] $items
+     * @param Node[] $stack
+     * @param int $metadataValuesSum
+     *
+     * @return int
+     */
+    private function processNextNode($i, $items, $stack, $metadataValuesSum)
+    {
+        return $this->processStack(
+            new Node((int)$items[$i + 1], (int)$items[$i + 2]),
+            $i + 2,
+            $items,
+            $stack,
+            $metadataValuesSum
+        );
     }
 }
