@@ -62,12 +62,11 @@ class Day08Part1Solver implements Solver
 
         ini_set('xdebug.max_nesting_level', 4000);
 
-        return (string)$this->processStack($items, count($items), 1, (int)$items[0], (int)$items[1], [], 0);
+        return (string)$this->processStack($items, 1, (int)$items[0], (int)$items[1], [], 0);
     }
 
     /**
      * @param string[] $items
-     * @param int $itemsCount
      * @param int $i
      * @param int $nodeChildrenCount
      * @param int $nodeMetadataCount
@@ -78,7 +77,6 @@ class Day08Part1Solver implements Solver
      */
     private function processStack(
         $items,
-        $itemsCount,
         $i,
         $nodeChildrenCount,
         $nodeMetadataCount,
@@ -101,7 +99,6 @@ class Day08Part1Solver implements Solver
 
             return $this->processStack(
                 $items,
-                $itemsCount,
                 $i,
                 $lastNodeChildrenCount,
                 $lastNodeMetadataCount,
@@ -116,7 +113,6 @@ class Day08Part1Solver implements Solver
 
             return $this->processStack(
                 $items,
-                $itemsCount,
                 $i,
                 $nodeChildrenCount,
                 $nodeMetadataCount,
