@@ -60,7 +60,7 @@ class Day08Part1Solver implements Solver
     {
         $items = $this->inputParser->parseItemsBySpace($input);
 
-        ini_set('xdebug.max_nesting_level', 5000);
+        ini_set('xdebug.max_nesting_level', 4000);
 
         return (string)$this->processStack(new Node((int)$items[0], (int)$items[1]), 1, $items, [], 0);
     }
@@ -81,7 +81,7 @@ class Day08Part1Solver implements Solver
         $stack,
         $metadataValuesSum
     ) {
-        // if we found all the node's children
+        // if we found all children of $node
         if ($node->getChildrenCount() === 0) {
             $nodeMetadataCount = $node->getMetadataCount();
 
@@ -94,36 +94,15 @@ class Day08Part1Solver implements Solver
                 return $metadataValuesSum;
             }
 
-            $parentNode = end($stack);
+            $parentNode = array_pop($stack);
             $parentNode->decrementChildrenCount();
-
-            // if we didn't find all the parent-node's children, move forward
-            if ($parentNode->getChildrenCount() > 0) {
-                return $this->processNextNode($i, $items, $stack, $metadataValuesSum);
-            }
-
-            // if we found all the parent-node's children, remove it from the stack
-            array_pop($stack);
 
             return $this->processStack($parentNode, $i, $items, $stack, $metadataValuesSum);
         }
 
-        // we didn't find all the node's children, add it to stack
+        // we didn't find all the children of $node, move forward to process next node
         $stack[] = $node;
 
-        return $this->processNextNode($i, $items, $stack, $metadataValuesSum);
-    }
-
-    /**
-     * @param int $i
-     * @param string[] $items
-     * @param Node[] $stack
-     * @param int $metadataValuesSum
-     *
-     * @return int
-     */
-    private function processNextNode($i, $items, $stack, $metadataValuesSum)
-    {
         return $this->processStack(
             new Node((int)$items[$i + 1], (int)$items[$i + 2]),
             $i + 2,

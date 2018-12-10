@@ -104,7 +104,7 @@ class Day08Part2Solver implements Solver
             return $this->processStack($parentNode, $i, $items, $stack);
         }
 
-        // we didn't find all the node's children, move forward
+        // we didn't find all the children of $node, move forward to process next node
         $stack[] = $node;
 
         return $this->processStack(
