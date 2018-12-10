@@ -29,6 +29,14 @@ class Node
     }
 
     /**
+     * @return void
+     */
+    public function decrementChildrenCount()
+    {
+        $this->childrenCount--;
+    }
+
+    /**
      * @return int
      */
     public function getMetadataCount()
