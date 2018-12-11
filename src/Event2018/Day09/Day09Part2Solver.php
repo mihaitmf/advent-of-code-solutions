@@ -36,8 +36,8 @@ class Day09Part2Solver implements Solver
         $playerIndex = 1;
 
         $currentMarble = new Marble(0);
-        $currentMarble->setNext($currentMarble);
-        $currentMarble->setPrev($currentMarble);
+        $currentMarble->setNext($currentMarble)
+            ->setPrev($currentMarble);
 
         while ($marbleTurn <= $lastMarbleNumber) {
             if ($marbleTurn % 23 === 0) {
@@ -52,7 +52,8 @@ class Day09Part2Solver implements Solver
 
                 // remove the marble from the circle
                 $currentMarble = $additionalMarble->getNext();
-                $additionalMarble->getPrev()->setNext($additionalMarble->getNext());
+                $additionalMarble->getPrev()->setNext($currentMarble);
+                $currentMarble->setPrev($additionalMarble->getPrev());
 
                 if (!array_key_exists($playerIndex, $scorePerPlayer)) {
                     $scorePerPlayer[$playerIndex] = $currentTurnScore;
