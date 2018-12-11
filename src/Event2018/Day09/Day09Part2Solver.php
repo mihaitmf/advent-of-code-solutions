@@ -26,7 +26,7 @@ class Day09Part2Solver implements Solver
         }
 
         $playersNumber = (int)$matches[1];
-        $lastMarbleNumber = 72000;
+        $lastMarbleNumber = (int)$matches[2] * 100;
 
         /** @var array Map<int, int> = <playerIndex, score> $scorePerPlayer */
         $scorePerPlayer = [];
