@@ -72,14 +72,7 @@ class Day11Part1Solver implements Solver
     {
         $serialNumber = (int)$input;
 
-        /** @var int[][] */
-        $cellsPowerMatrix = [];
-
-        for ($x = 1; $x <= 300; $x++) {
-            for ($y = 1; $y <= 300; $y++) {
-                $cellsPowerMatrix[$x][$y] = $this->calculateCellPower($x, $y, $serialNumber);
-            }
-        }
+        $cellsPowerMatrix = $this->calculateCellsPowerMatrix($serialNumber);
 
         $maxSquareTotalPower = 0;
         $maxSquareTotalPowerCoordinates = "";
@@ -100,6 +93,25 @@ class Day11Part1Solver implements Solver
         }
 
         return $maxSquareTotalPowerCoordinates;
+    }
+
+    /**
+     * @param int $serialNumber
+     *
+     * @return int[][]
+     */
+    private function calculateCellsPowerMatrix($serialNumber)
+    {
+        /** @var int[][] */
+        $cellsPowerMatrix = [];
+
+        for ($x = 1; $x <= 300; $x++) {
+            for ($y = 1; $y <= 300; $y++) {
+                $cellsPowerMatrix[$x][$y] = $this->calculateCellPower($x, $y, $serialNumber);
+            }
+        }
+
+        return $cellsPowerMatrix;
     }
 
     /**
