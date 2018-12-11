@@ -7,7 +7,12 @@ use AdventOfCode\Common\Solver;
 /**
  * http://adventofcode.com/2018/day/9
  *
+--- Part Two ---
+Amused by the speed of your answer, the Elves are curious:
 
+What would the new winning Elf's score be if the number of the last marble were 100 times larger?
+
+Your puzzle answer was 3085518618.
  */
 class Day09Part2Solver implements Solver
 {
@@ -37,6 +42,13 @@ class Day09Part2Solver implements Solver
         $currentMarble = new Marble(0);
         $currentMarble->setNext($currentMarble)
             ->setPrev($currentMarble);
+
+        /**
+         * Apparently the garbage collector produced a segmentation fault error when trying to handle a large number
+         * of objects referenced by each other.
+         * Error was "Process finished with exit code 139 (interrupted by signal 11: SIGSEGV)"
+         */
+        gc_disable();
 
         while ($marbleTurn <= $lastMarbleNumber) {
             if ($marbleTurn % 23 === 0) {
