@@ -68,31 +68,55 @@ class Day09Part1Solver implements Solver
      */
     public function solve($input)
     {
+        $matches = $this->parseInput($input);
+
+        $playersNumber = (int)$matches[1];
+        $lastMarbleNumber = (int)$matches[2];
+
+        return $this->calculateMaxScore($playersNumber, $lastMarbleNumber);
+
+    }
+
+    /**
+     * @param $input
+     *
+     * @return array
+     */
+    public function parseInput($input)
+    {
         $matches = [];
         $matchResult = preg_match("/^(\d+) players; last marble is worth (\d+) points$/", $input, $matches);
 
         if ($matchResult !== 1) {
             throw new \RuntimeException("Invalid input, could not match pattern");
         }
+        return $matches;
+    }
 
-        $playersNumber = (int)$matches[1];
-        $lastMarbleNumber = (int)$matches[2];
-
+    /**
+     * @param int $playersNumber
+     * @param int $lastMarbleNumber
+     *
+     * @return string
+     */
+    public function calculateMaxScore($playersNumber, $lastMarbleNumber)
+    {
         /** @var array Map<int, int> = <playerIndex, score> $scorePerPlayer */
         $scorePerPlayer = [];
 
-        $maxScore = 0;
+        $currentMarble = new Marble(0);
+        $currentMarble->setNext($currentMarble)
+            ->setPrev($currentMarble);
+
         $marbleTurn = 1;
         $playerIndex = 1;
 
-        $currentMarble = new Marble(0);
-        $currentMarble->setNext($currentMarble);
-        $currentMarble->setPrev($currentMarble);
-
         while ($marbleTurn <= $lastMarbleNumber) {
+
             if ($marbleTurn % 23 === 0) {
                 $moveLeftSteps = 7;
                 $additionalMarble = $currentMarble;
+
                 while ($moveLeftSteps > 0) {
                     $additionalMarble = $additionalMarble->getPrev();
                     $moveLeftSteps--;
@@ -102,16 +126,13 @@ class Day09Part1Solver implements Solver
 
                 // remove the marble from the circle
                 $currentMarble = $additionalMarble->getNext();
-                $additionalMarble->getPrev()->setNext($additionalMarble->getNext());
+                $additionalMarble->getPrev()->setNext($currentMarble);
+                $currentMarble->setPrev($additionalMarble->getPrev());
 
                 if (!array_key_exists($playerIndex, $scorePerPlayer)) {
                     $scorePerPlayer[$playerIndex] = $currentTurnScore;
                 } else {
                     $scorePerPlayer[$playerIndex] += $currentTurnScore;
-                }
-
-                if ($scorePerPlayer[$playerIndex] > $maxScore) {
-                    $maxScore = $scorePerPlayer[$playerIndex];
                 }
 
             } else {
@@ -137,6 +158,6 @@ class Day09Part1Solver implements Solver
             $marbleTurn++;
         }
 
-        return (string)$maxScore;
+        return (string)max($scorePerPlayer);
     }
 }
