@@ -34,7 +34,7 @@ class Marble
      *
      * @return Marble
      */
-    public function setNext($next)
+    public function setNext(Marble $next)
     {
         $this->next = $next;
         return $this;
@@ -53,7 +53,7 @@ class Marble
      *
      * @return Marble
      */
-    public function setPrev($prev)
+    public function setPrev(Marble $prev)
     {
         $this->prev = $prev;
         return $this;
