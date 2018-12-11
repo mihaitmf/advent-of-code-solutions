@@ -26,12 +26,11 @@ class Day09Part2Solver implements Solver
         }
 
         $playersNumber = (int)$matches[1];
-        $lastMarbleNumber = (int)$matches[2] * 100;
+        $lastMarbleNumber = 72000;
 
         /** @var array Map<int, int> = <playerIndex, score> $scorePerPlayer */
         $scorePerPlayer = [];
 
-        $maxScore = 0;
         $marbleTurn = 1;
         $playerIndex = 1;
 
@@ -61,10 +60,6 @@ class Day09Part2Solver implements Solver
                     $scorePerPlayer[$playerIndex] += $currentTurnScore;
                 }
 
-                if ($scorePerPlayer[$playerIndex] > $maxScore) {
-                    $maxScore = $scorePerPlayer[$playerIndex];
-                }
-
             } else {
                 $leftSideMarble = $currentMarble->getNext();
                 $rightSideMarble = $currentMarble->getNext()->getNext();
@@ -88,6 +83,6 @@ class Day09Part2Solver implements Solver
             $marbleTurn++;
         }
 
-        return (string)$maxScore;
+        return (string)max($scorePerPlayer);
     }
 }
