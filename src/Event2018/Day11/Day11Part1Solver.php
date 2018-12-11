@@ -72,38 +72,30 @@ class Day11Part1Solver implements Solver
     {
         $serialNumber = (int)$input;
 
-        /** @var int[] Map<string, int> = <cell-coordinates-concatenated, power> */
-        $cellsPowerMap = [];
+        /** @var int[][] */
+        $cellsPowerMatrix = [];
 
         for ($x = 1; $x <= 300; $x++) {
             for ($y = 1; $y <= 300; $y++) {
-                $cellsPowerMap[$x . ',' . $y] = $this->calculateCellPower($x, $y, $serialNumber);
+                $cellsPowerMatrix[$x][$y] = $this->calculateCellPower($x, $y, $serialNumber);
             }
         }
-
-        arsort($cellsPowerMap);
 
         $maxSquareTotalPower = 0;
         $maxSquareTotalPowerCoordinates = "";
 
-        foreach ($cellsPowerMap as $cellCoordinates => $cellPower) {
-            $parts = explode(',', $cellCoordinates);
-            $x = $parts[0];
-            $y = $parts[1];
+        for ($x = 1; $x <= 298; $x++) {
+            for ($y = 1; $y <= 298; $y++) {
+                $squareTotalPower = $this->calculateSquareTotalPower($x, $y, $cellsPowerMatrix);
 
-            if ($x > 297 || $y > 297) {
-                continue;
-            }
+                if ($squareTotalPower === 36) {
+                    return $x . ',' . $y;
+                }
 
-            $squareTotalPower = $this->calculateSquareTotalPower($x, $y, $cellsPowerMap);
-
-            if ($squareTotalPower === 36) {
-                return $x . ',' . $y;
-            }
-
-            if ($squareTotalPower > $maxSquareTotalPower) {
-                $maxSquareTotalPower = $squareTotalPower;
-                $maxSquareTotalPowerCoordinates = $x . ',' . $y;
+                if ($squareTotalPower > $maxSquareTotalPower) {
+                    $maxSquareTotalPower = $squareTotalPower;
+                    $maxSquareTotalPowerCoordinates = $x . ',' . $y;
+                }
             }
         }
 
@@ -128,11 +120,11 @@ class Day11Part1Solver implements Solver
     /**
      * @param int $topLeftCellX
      * @param int $topLeftCellY
-     * @param int[] $cellsPowerMap Map<string, int> = <cell-coordinates-concatenated, power>
+     * @param int[][] $cellsPowerMatrix
      *
      * @return int
      */
-    private function calculateSquareTotalPower($topLeftCellX, $topLeftCellY, array $cellsPowerMap)
+    private function calculateSquareTotalPower($topLeftCellX, $topLeftCellY, array $cellsPowerMatrix)
     {
         $sum = 0;
 
@@ -141,7 +133,7 @@ class Day11Part1Solver implements Solver
                 $x = $i + $topLeftCellX;
                 $y = $j + $topLeftCellY;
 
-                $sum += $cellsPowerMap[$x . ',' . $y];
+                $sum += $cellsPowerMatrix[$x][$y];
             }
         }
 
