@@ -10,7 +10,9 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 $input = trim(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "input.txt"));
 $result = solve($input);
 print($result);
-print(sprintf("\n\nExecution time: %.4f seconds\n", microtime(true) - $startTime));
+print(sprintf("\n\nExecution time: %.4f seconds", microtime(true) - $startTime));
+print(sprintf("\nMemory usage: %.2f MB", memory_get_usage(false)/1024/1024));
+print(sprintf("\nMemory peak usage: %.2f MB\n", memory_get_peak_usage(false)/1024/1024));
 
 function solve($input)
 {
