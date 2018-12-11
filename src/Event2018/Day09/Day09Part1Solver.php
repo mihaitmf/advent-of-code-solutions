@@ -90,10 +90,6 @@ class Day09Part1Solver implements Solver
         $currentMarble->setPrev($currentMarble);
 
         while ($marbleTurn <= $lastMarbleNumber) {
-            if ($playerIndex > $playersNumber) {
-                $playerIndex = 1;
-            }
-
             if ($marbleTurn % 23 === 0) {
                 $moveLeftSteps = 7;
                 $additionalMarble = $currentMarble;
@@ -114,7 +110,9 @@ class Day09Part1Solver implements Solver
                     $scorePerPlayer[$playerIndex] += $currentTurnScore;
                 }
 
-                $maxScore = max($maxScore, $scorePerPlayer[$playerIndex]);
+                if ($scorePerPlayer[$playerIndex] > $maxScore) {
+                    $maxScore = $scorePerPlayer[$playerIndex];
+                }
 
             } else {
                 $leftSideMarble = $currentMarble->getNext();
@@ -130,7 +128,12 @@ class Day09Part1Solver implements Solver
                 $currentMarble = $newMarble;
             }
 
-            $playerIndex++;
+            if ($playerIndex === $playersNumber) {
+                $playerIndex = 1;
+            } else {
+                $playerIndex++;
+            }
+
             $marbleTurn++;
         }
 
