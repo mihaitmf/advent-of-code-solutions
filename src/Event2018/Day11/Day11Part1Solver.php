@@ -103,7 +103,7 @@ class Day11Part1Solver implements Solver
      *
      * @return int[][]
      */
-    private function calculateCellsPowerMatrix($serialNumber)
+    public function calculateCellsPowerMatrix($serialNumber)
     {
         /** @var int[][] */
         $cellsPowerMatrix = [];
@@ -140,7 +140,7 @@ class Day11Part1Solver implements Solver
      *
      * @return int
      */
-    private function calculateSquareTotalPower(array $cellsPowerMatrix, $topLeftCellX, $topLeftCellY, $squareSize)
+    public function calculateSquareTotalPower(array $cellsPowerMatrix, $topLeftCellX, $topLeftCellY, $squareSize)
     {
         $sum = 0;
 
