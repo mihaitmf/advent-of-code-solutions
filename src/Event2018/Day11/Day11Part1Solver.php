@@ -79,7 +79,7 @@ class Day11Part1Solver implements Solver
 
         for ($x = 1; $x <= 298; $x++) {
             for ($y = 1; $y <= 298; $y++) {
-                $squareTotalPower = $this->calculateSquareTotalPower($x, $y, $cellsPowerMatrix);
+                $squareTotalPower = $this->calculateSquareTotalPower($cellsPowerMatrix, $x, $y, 3);
 
                 if ($squareTotalPower === 36) {
                     return $x . ',' . $y;
@@ -130,18 +130,19 @@ class Day11Part1Solver implements Solver
     }
 
     /**
+     * @param int[][] $cellsPowerMatrix
      * @param int $topLeftCellX
      * @param int $topLeftCellY
-     * @param int[][] $cellsPowerMatrix
+     * @param int $squareSize
      *
      * @return int
      */
-    private function calculateSquareTotalPower($topLeftCellX, $topLeftCellY, array $cellsPowerMatrix)
+    private function calculateSquareTotalPower(array $cellsPowerMatrix, $topLeftCellX, $topLeftCellY, $squareSize)
     {
         $sum = 0;
 
-        for ($i = 0; $i < 3; $i++) {
-            for ($j = 0; $j < 3; $j++) {
+        for ($i = 0; $i < $squareSize; $i++) {
+            for ($j = 0; $j < $squareSize; $j++) {
                 $x = $i + $topLeftCellX;
                 $y = $j + $topLeftCellY;
 
