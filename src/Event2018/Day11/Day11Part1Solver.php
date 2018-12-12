@@ -74,7 +74,7 @@ class Day11Part1Solver implements Solver
 
         $cellsPowerMatrix = $this->calculateCellsPowerMatrix($serialNumber);
 
-        $maxSquareTotalPower = 0;
+        $maxSquareTotalPower = null;
         $maxSquareTotalPowerCoordinates = "";
 
         for ($x = 1; $x <= 298; $x++) {
@@ -85,7 +85,10 @@ class Day11Part1Solver implements Solver
                     return $x . ',' . $y;
                 }
 
-                if ($squareTotalPower > $maxSquareTotalPower) {
+                if ($maxSquareTotalPower === null) {
+                    $maxSquareTotalPower = $squareTotalPower;
+
+                } elseif ($squareTotalPower > $maxSquareTotalPower) {
                     $maxSquareTotalPower = $squareTotalPower;
                     $maxSquareTotalPowerCoordinates = $x . ',' . $y;
                 }
