@@ -75,6 +75,7 @@ class Day05Part1Solver implements Solver
                 $stackSize++;
             }
         }
+
         return $stackSize;
-}
+    }
 }
