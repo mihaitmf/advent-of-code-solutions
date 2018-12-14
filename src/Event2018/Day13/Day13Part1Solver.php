@@ -240,22 +240,16 @@ class Day13Part1Solver implements Solver
                 list($newX, $newY) = $this->calculateNewPosition($cart);
 
                 $newCoordinatesAsString = $this->coordinatesAsString($newX, $newY);
+
                 if ($this->isCollisionDetected($newCoordinatesAsString, $cartsPositions)) {
                     return $newCoordinatesAsString;
                 }
 
+                // set new cart position
                 unset($cartsPositions[$this->coordinatesAsString($cart->getX(), $cart->getY())]);
                 $cartsPositions[$newCoordinatesAsString] = 1;
 
-                $nextPath = $gameMap[$newY][$newX];
-                $newDirection = $this->calculateNewDirection($nextPath, $cart);
-
-                $cart->setNewPosition($newX, $newY, $newDirection);
-
-                if ($nextPath === '+') {
-                    $cart->incrementIntersectionDecision();
-                }
-
+                $this->updateCartToNewPosition($cart, $gameMap, $newX, $newY);
             }
         }
     }
@@ -330,6 +324,26 @@ class Day13Part1Solver implements Solver
     private function isCollisionDetected($newCoordinatesAsString, array $cartsPositions)
     {
         return array_key_exists($newCoordinatesAsString, $cartsPositions);
+    }
+
+    /**
+     * @param Cart $cart
+     * @param string[][] $gameMap
+     * @param int $newX
+     * @param int $newY
+     *
+     * @return void
+     */
+    private function updateCartToNewPosition(Cart $cart, array $gameMap, $newX, $newY)
+    {
+        $nextPath = $gameMap[$newY][$newX];
+        $newDirection = $this->calculateNewDirection($nextPath, $cart);
+
+        $cart->setNewPosition($newX, $newY, $newDirection);
+
+        if ($nextPath === '+') {
+            $cart->incrementIntersectionDecision();
+        }
     }
 
     /**
