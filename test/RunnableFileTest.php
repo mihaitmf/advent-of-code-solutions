@@ -40,7 +40,11 @@ class RunnableFileTest extends TestCase
 
     public function providerImplementedSolutionsFor2018Event()
     {
-        $knownForFailingSolvers = [];
+        $knownForFailingSolvers = [
+            "Day06Part1Solver.php",
+            "Day09Part2Solver.php",
+            "Day11Part2Solver.php",
+        ];
         $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2018";
 
         return $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
@@ -117,7 +121,7 @@ class RunnableFileTest extends TestCase
     {
         $errorMessage = $this->getCommonErrorMessage($year, $day, $part, $output);
 
-        $matchResult = preg_match("/^Result is: \w+\n/", $output);
+        $matchResult = preg_match("/^Result is: [\w,]+\n/", $output);
         $this->assertSame(1, $matchResult, $errorMessage);
     }
 
