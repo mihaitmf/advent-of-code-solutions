@@ -99,6 +99,6 @@ class SolutionRunner
             throw new InvalidArgumentException("Error reading input file {$absoluteInputFilePath}");
         }
 
-        return trim($input);
+        return rtrim($input);
     }
 }
