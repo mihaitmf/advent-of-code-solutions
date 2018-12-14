@@ -257,7 +257,7 @@ class Day13Part1Solver implements Solver
     /**
      * @return \Closure
      */
-    private function cartPositionComparator()
+    public function cartPositionComparator()
     {
         return function (Cart $a, Cart $b) {
             if ($a->getX() === $b->getX() && $a->getY() === $b->getY()) {
@@ -281,7 +281,7 @@ class Day13Part1Solver implements Solver
      *
      * @return int[]
      */
-    private function calculateNewPosition(Cart $cart)
+    public function calculateNewPosition(Cart $cart)
     {
         $x = $cart->getX();
         $y = $cart->getY();
@@ -310,7 +310,7 @@ class Day13Part1Solver implements Solver
      *
      * @return string
      */
-    private function coordinatesAsString($x, $y)
+    public function coordinatesAsString($x, $y)
     {
         return sprintf("%s,%s", $x, $y);
     }
@@ -321,7 +321,7 @@ class Day13Part1Solver implements Solver
      *
      * @return bool
      */
-    private function isCollisionDetected($newCoordinatesAsString, array $cartsPositions)
+    public function isCollisionDetected($newCoordinatesAsString, array $cartsPositions)
     {
         return array_key_exists($newCoordinatesAsString, $cartsPositions);
     }
@@ -334,7 +334,7 @@ class Day13Part1Solver implements Solver
      *
      * @return void
      */
-    private function updateCartToNewPosition(Cart $cart, array $gameMap, $newX, $newY)
+    public function updateCartToNewPosition(Cart $cart, array $gameMap, $newX, $newY)
     {
         $nextPath = $gameMap[$newY][$newX];
         $newDirection = $this->calculateNewDirection($nextPath, $cart);
