@@ -186,7 +186,7 @@ class Day10Part1Solver implements Solver
      *
      * @return array [Point[], Map<string, int>]
      */
-    private function parseInput($input)
+    public function parseInput($input)
     {
         $points = [];
         $pointsPositions = [];
@@ -240,7 +240,7 @@ class Day10Part1Solver implements Solver
      *
      * @return bool
      */
-    private function arePointsAligned(array $points, array $pointsPositions)
+    public function arePointsAligned(array $points, array $pointsPositions)
     {
         foreach ($points as $point) {
             $x = $point->getPositionX();
@@ -268,7 +268,7 @@ class Day10Part1Solver implements Solver
      *
      * @return void
      */
-    private function updatePointsPositions(array &$points, array &$pointsPositions)
+    public function updatePointsPositions(array &$points, array &$pointsPositions)
     {
         foreach ($points as $i => $point) {
             $oldX = $point->getPositionX();
