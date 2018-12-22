@@ -41,7 +41,6 @@ function solve($input)
     }
 
     // matrix input
-    $matrix = $inputParser->parseMatrix($input);
     $rows = $inputParser->parseRows($input);
     foreach ($rows as $rowIndex => $row) {
         $items = $inputParser->parseItemsByTab($row);
