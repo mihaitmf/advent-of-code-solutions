@@ -63,6 +63,8 @@ Your puzzle answer was 243,72.
  */
 class Day11Part1Solver implements Solver
 {
+    const MAX_POSSIBLE_SQUARE_POWER = 36; // because max possible cell power is 4 and the square is 3x3 = 9 cells
+
     /**
      * @param string $input
      *
@@ -81,7 +83,7 @@ class Day11Part1Solver implements Solver
             for ($y = 1; $y <= 298; $y++) {
                 $squareTotalPower = $this->calculateSquareTotalPower($cellsPowerMatrix, $x, $y, 3);
 
-                if ($squareTotalPower === 36) {
+                if ($squareTotalPower === self::MAX_POSSIBLE_SQUARE_POWER) {
                     return $x . ',' . $y;
                 }
 
