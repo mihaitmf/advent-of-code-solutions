@@ -41,10 +41,9 @@ class RunnableFileTest extends TestCase
     public function providerImplementedSolutionsFor2018Event()
     {
         $knownForFailingSolvers = [
-            "Day06Part1Solver.php",
-            "Day09Part2Solver.php",
-            "Day10Part1Solver.php",
-            "Day11Part2Solver.php",
+            "Day06Part1Solver.php", // TODO not finished implementation
+            "Day09Part2Solver.php", // TODO segmentation fault on php 5.5
+            "Day10Part1Solver.php", // TODO interpret letter drawing
         ];
         $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2018";
 

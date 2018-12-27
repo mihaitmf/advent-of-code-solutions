@@ -65,22 +65,22 @@ class SolutionRunnerIntegrationTest extends TestCase
             "Day 01 Part 2" => [1, 2, "66932"],
             "Day 02 Part 1" => [2, 1, "8296"],
             "Day 02 Part 2" => [2, 2, "pazvmqbftrbeosiecxlghkwud"],
-            "Day 03 Part 1" => [3, 1, "105071"],
-            "Day 03 Part 2" => [3, 2, "222"],
+            "Day 03 Part 1" => [3, 1, "105071"], // very slow ~30s
+            "Day 03 Part 2" => [3, 2, "222"], // very slow ~40s
             "Day 04 Part 1" => [4, 1, "48680"],
             "Day 04 Part 2" => [4, 2, "94826"],
             "Day 05 Part 1" => [5, 1, "11476"],
-            "Day 05 Part 2" => [5, 2, "5446"],
+            "Day 05 Part 2" => [5, 2, "5446"], // moderately slow ~14s
             "Day 08 Part 1" => [8, 1, "43996"],
             "Day 08 Part 2" => [8, 2, "35189"],
             "Day 09 Part 1" => [9, 1, "386018"],
-//            "Day 09 Part 2" => [9, 2, "3085518618"],
-//            "Day 10 Part 1" => [10, 1, "HRPHBRKG"],
-            "Day 10 Part 2" => [10, 2, "10355"],
+//            "Day 09 Part 2" => [9, 2, "3085518618"], TODO segmentation fault on php 5.5
+//            "Day 10 Part 1" => [10, 1, "HRPHBRKG"], TODO interpret letter drawing
+            "Day 10 Part 2" => [10, 2, "10355"], // severely slow ~3m50s
             "Day 11 Part 1" => [11, 1, "243,72"],
-//            "Day 11 Part 2" => [11, 2, "229,192,11"],
+            "Day 11 Part 2" => [11, 2, "229,192,11"], // severely slow ~3m40s
             "Day 13 Part 1" => [13, 1, "124,90"],
-            "Day 13 Part 2" => [13, 2, "145,88"],
+            "Day 13 Part 2" => [13, 2, "145,88"], // moderately slow ~4s
         ];
     }
 }
