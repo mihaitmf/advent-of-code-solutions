@@ -60,7 +60,7 @@ class Day11Part2Solver implements Solver
                         $maxSquareTotalPower = $squareTotalPower;
                         $maxSquareTotalPowerCoordinates = $x . ',' . $y . ',' . $squareSize;
 
-                        echo $maxSquareTotalPowerCoordinates . "\t" . $maxSquareTotalPower . "\n";
+//                        echo $maxSquareTotalPowerCoordinates . "\t" . $maxSquareTotalPower . "\n";
                     }
                 }
             }
@@ -69,7 +69,7 @@ class Day11Part2Solver implements Solver
                 return $maxSquareTotalPowerCoordinates;
             }
 
-            echo $squareSize . "\n";
+//            echo $squareSize . "\n";
         }
 
         return $maxSquareTotalPowerCoordinates;
