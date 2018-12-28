@@ -41,43 +41,62 @@ class Day03Part2Solver implements Solver
     {
         $items = $this->inputParser->parseRows($input);
 
+        /** @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount> */
+        $claimsOnPoints = [];
+
         /** @var ClaimSquare[] $claimsList */
         $claimsList = [];
-        $nonOverlappingClaims = [];
-        $countClaims = count($items);
 
         foreach ($items as $item) {
-            $currentClaim = $this->part1Solver->parseClaimSquare($item);
+            $claimSquare = $this->part1Solver->parseClaimSquare($item);
+            list($left, $right, $top, $bottom) = [
+                $claimSquare->getLeft(),
+                $claimSquare->getRight(),
+                $claimSquare->getTop(),
+                $claimSquare->getBottom()
+            ];
 
-            foreach ($claimsList as $previousClaim) {
-                $maxLeft = max($previousClaim->getLeft(), $currentClaim->getLeft());
-                $minRight = min($previousClaim->getRight(), $currentClaim->getRight());
-                $maxTop = max($previousClaim->getTop(), $currentClaim->getTop());
-                $minBottom = min($previousClaim->getBottom(), $currentClaim->getBottom());
+            for ($y = $top; $y <= $bottom; $y++) {
+                for ($x = $left; $x <= $right; $x++) {
+                    $coordinatesAsString = $x . ',' . $y;
 
-                if (!($maxLeft <= $minRight && $maxTop <= $minBottom)) {
-                    $currentClaimId = $currentClaim->getId();
-                    if (!array_key_exists($currentClaimId, $nonOverlappingClaims)) {
-                        $nonOverlappingClaims[$currentClaimId] = 1;
+                    if (!array_key_exists($coordinatesAsString, $claimsOnPoints)) {
+                        $claimsOnPoints[$coordinatesAsString] = 1;
                     } else {
-                        $nonOverlappingClaims[$currentClaimId]++;
-                        if ($nonOverlappingClaims[$currentClaimId] === $countClaims - 1) {
-                            return (string)$currentClaimId;
-                        }
-                    }
-                    $previousClaimId = $previousClaim->getId();
-                    if (!array_key_exists($previousClaimId, $nonOverlappingClaims)) {
-                        $nonOverlappingClaims[$previousClaimId] = 1;
-                    } else {
-                        $nonOverlappingClaims[$previousClaimId]++;
-                        if ($nonOverlappingClaims[$previousClaimId] === $countClaims - 1) {
-                            return (string)$previousClaimId;
-                        }
+                        $claimsOnPoints[$coordinatesAsString]++;
                     }
                 }
             }
 
-            $claimsList[] = $currentClaim;
+            $claimsList[] = $claimSquare;
         }
+
+        foreach ($claimsList as $claimSquare) {
+            list($left, $right, $top, $bottom) = [
+                $claimSquare->getLeft(),
+                $claimSquare->getRight(),
+                $claimSquare->getTop(),
+                $claimSquare->getBottom()
+            ];
+
+            $isOverlappingClaim = false;
+
+            for ($y = $top; $y <= $bottom; $y++) {
+                for ($x = $left; $x <= $right; $x++) {
+                    $coordinatesAsString = $x . ',' . $y;
+
+                    if ($claimsOnPoints[$coordinatesAsString] !== 1) {
+                        $isOverlappingClaim = true;
+                        break 2;
+                    }
+                }
+            }
+
+            if (!$isOverlappingClaim) {
+                return (string)$claimSquare->getId();
+            }
+        }
+
+        throw new \RuntimeException("Solution not found!");
     }
 }
