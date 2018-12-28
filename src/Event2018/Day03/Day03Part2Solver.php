@@ -2,7 +2,6 @@
 
 namespace AdventOfCode\Event2018\Day03;
 
-use AdventOfCode\Common\InputParser;
 use AdventOfCode\Common\Solver;
 use DI\Annotation\Inject;
 
@@ -22,12 +21,6 @@ class Day03Part2Solver implements Solver
 {
     /**
      * @Inject
-     * @var InputParser
-     */
-    private $inputParser;
-
-    /**
-     * @Inject
      * @var Day03Part1Solver
      */
     private $part1Solver;
@@ -39,37 +32,11 @@ class Day03Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $items = $this->inputParser->parseRows($input);
-
-        /** @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount> */
-        $claimsOnPoints = [];
-
-        /** @var ClaimSquare[] $claimsList */
-        $claimsList = [];
-
-        foreach ($items as $item) {
-            $claimSquare = $this->part1Solver->parseClaimSquare($item);
-            list($left, $right, $top, $bottom) = [
-                $claimSquare->getLeft(),
-                $claimSquare->getRight(),
-                $claimSquare->getTop(),
-                $claimSquare->getBottom()
-            ];
-
-            for ($y = $top; $y <= $bottom; $y++) {
-                for ($x = $left; $x <= $right; $x++) {
-                    $coordinatesAsString = $x . ',' . $y;
-
-                    if (!array_key_exists($coordinatesAsString, $claimsOnPoints)) {
-                        $claimsOnPoints[$coordinatesAsString] = 1;
-                    } else {
-                        $claimsOnPoints[$coordinatesAsString]++;
-                    }
-                }
-            }
-
-            $claimsList[] = $claimSquare;
-        }
+        /**
+         * @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount>
+         * @var ClaimSquare[] $claimsList
+         */
+        list($claimsOnPoints, $claimsList) = $this->part1Solver->parseClaims($input);
 
         foreach ($claimsList as $claimSquare) {
             list($left, $right, $top, $bottom) = [

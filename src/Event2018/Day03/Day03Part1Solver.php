@@ -68,15 +68,39 @@ class Day03Part1Solver implements Solver
      */
     public function solve($input)
     {
-        $items = $this->inputParser->parseRows($input);
-
         /** @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount> */
-        $claimsOnPoints = [];
+        list($claimsOnPoints, $claimsList) = $this->parseClaims($input);
 
         $countOverlappingPoints = 0;
 
+        foreach ($claimsOnPoints as $claimsCount) {
+            if ($claimsCount > 1) {
+                $countOverlappingPoints++;
+            }
+        }
+
+        return (string)$countOverlappingPoints;
+    }
+
+    /**
+     * @param string $input
+     *
+     * @return array [Map<string, int>, ClaimSquare[]]
+     */
+    public function parseClaims($input)
+    {
+        /** @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount> */
+        $claimsOnPoints = [];
+
+        /** @var ClaimSquare[] $claimsList */
+        $claimsList = [];
+
+        $items = $this->inputParser->parseRows($input);
+
         foreach ($items as $item) {
             $claimSquare = $this->parseClaimSquare($item);
+            $claimsList[] = $claimSquare;
+
             list($left, $right, $top, $bottom) = [
                 $claimSquare->getLeft(),
                 $claimSquare->getRight(),
@@ -97,13 +121,7 @@ class Day03Part1Solver implements Solver
             }
         }
 
-        foreach ($claimsOnPoints as $claimsCount) {
-            if ($claimsCount > 1) {
-                $countOverlappingPoints++;
-            }
-        }
-
-        return (string)$countOverlappingPoints;
+        return [$claimsOnPoints, $claimsList];
     }
 
     /**
@@ -111,7 +129,7 @@ class Day03Part1Solver implements Solver
      *
      * @return ClaimSquare
      */
-    public function parseClaimSquare($item)
+    private function parseClaimSquare($item)
     {
         $matches = [];
         $matchResult = preg_match("/^#(\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)$/", $item, $matches);
