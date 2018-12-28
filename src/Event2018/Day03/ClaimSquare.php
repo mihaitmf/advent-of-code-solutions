@@ -2,7 +2,7 @@
 
 namespace AdventOfCode\Event2018\Day03;
 
-class ClaimMatrix
+class ClaimSquare
 {
     /** @var int */
     private $id;

@@ -65,7 +65,7 @@ class SolutionRunnerIntegrationTest extends TestCase
             "Day 01 Part 2" => [1, 2, "66932"],
             "Day 02 Part 1" => [2, 1, "8296"],
             "Day 02 Part 2" => [2, 2, "pazvmqbftrbeosiecxlghkwud"],
-            "Day 03 Part 1" => [3, 1, "105071"], // very slow ~30s
+            "Day 03 Part 1" => [3, 1, "105071"],
             "Day 03 Part 2" => [3, 2, "222"], // very slow ~40s
             "Day 04 Part 1" => [4, 1, "48680"],
             "Day 04 Part 2" => [4, 2, "94826"],

@@ -70,35 +70,37 @@ class Day03Part1Solver implements Solver
     {
         $items = $this->inputParser->parseRows($input);
 
-        /** @var ClaimMatrix[] $claimsList */
-        $claimsList = [];
-        $overlapPoints = []; // only use the keys, store in keys because searching is faster than in values
+        /** @var array $claimsOnPoints Map<string, int> = <coordinates, claimsCount> */
+        $claimsOnPoints = [];
+
         $countOverlappingPoints = 0;
 
         foreach ($items as $item) {
-            $currentClaim = $this->parseClaimMatrix($item);
+            $claimSquare = $this->parseClaimSquare($item);
+            list($left, $right, $top, $bottom) = [
+                $claimSquare->getLeft(),
+                $claimSquare->getRight(),
+                $claimSquare->getTop(),
+                $claimSquare->getBottom()
+            ];
 
-            foreach ($claimsList as $previousClaim) {
-                $maxLeft = max($previousClaim->getLeft(), $currentClaim->getLeft());
-                $minRight = min($previousClaim->getRight(), $currentClaim->getRight());
-                $maxTop = max($previousClaim->getTop(), $currentClaim->getTop());
-                $minBottom = min($previousClaim->getBottom(), $currentClaim->getBottom());
+            for ($y = $top; $y <= $bottom; $y++) {
+                for ($x = $left; $x <= $right; $x++) {
+                    $coordinatesAsString = $x . ',' . $y;
 
-                // if overlapping claims
-                if ($maxLeft <= $minRight && $maxTop <= $minBottom) {
-                    for ($i = $maxLeft; $i <= $minRight; $i++ ) {
-                        for ($j = $maxTop; $j <= $minBottom; $j++ ) {
-                            $point = $i . 'x' . $j;
-                            if (!array_key_exists($point, $overlapPoints)) {
-                                $overlapPoints[$point] = 1;
-                                $countOverlappingPoints++;
-                            }
-                        }
+                    if (!array_key_exists($coordinatesAsString, $claimsOnPoints)) {
+                        $claimsOnPoints[$coordinatesAsString] = 1;
+                    } else {
+                        $claimsOnPoints[$coordinatesAsString]++;
                     }
                 }
             }
+        }
 
-            $claimsList[] = $currentClaim;
+        foreach ($claimsOnPoints as $claimsCount) {
+            if ($claimsCount > 1) {
+                $countOverlappingPoints++;
+            }
         }
 
         return (string)$countOverlappingPoints;
@@ -107,9 +109,9 @@ class Day03Part1Solver implements Solver
     /**
      * @param string $item
      *
-     * @return ClaimMatrix
+     * @return ClaimSquare
      */
-    public function parseClaimMatrix($item)
+    public function parseClaimSquare($item)
     {
         $matches = [];
         $matchResult = preg_match("/^#(\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)$/", $item, $matches);
@@ -117,11 +119,11 @@ class Day03Part1Solver implements Solver
             throw new RuntimeException("Could not parse claim");
         }
 
-        return new ClaimMatrix(
-            $matches[1],
-            $matches[2],
+        return new ClaimSquare(
+            (int)$matches[1],
+            (int)$matches[2],
             $matches[2] + $matches[4] - 1,
-            $matches[3],
+            (int)$matches[3],
             $matches[3] + $matches[5] - 1
         );
     }

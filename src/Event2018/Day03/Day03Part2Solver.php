@@ -41,13 +41,13 @@ class Day03Part2Solver implements Solver
     {
         $items = $this->inputParser->parseRows($input);
 
-        /** @var ClaimMatrix[] $claimsList */
+        /** @var ClaimSquare[] $claimsList */
         $claimsList = [];
         $nonOverlappingClaims = [];
         $countClaims = count($items);
 
         foreach ($items as $item) {
-            $currentClaim = $this->part1Solver->parseClaimMatrix($item);
+            $currentClaim = $this->part1Solver->parseClaimSquare($item);
 
             foreach ($claimsList as $previousClaim) {
                 $maxLeft = max($previousClaim->getLeft(), $currentClaim->getLeft());
@@ -62,7 +62,7 @@ class Day03Part2Solver implements Solver
                     } else {
                         $nonOverlappingClaims[$currentClaimId]++;
                         if ($nonOverlappingClaims[$currentClaimId] === $countClaims - 1) {
-                            return $currentClaimId;
+                            return (string)$currentClaimId;
                         }
                     }
                     $previousClaimId = $previousClaim->getId();
@@ -71,7 +71,7 @@ class Day03Part2Solver implements Solver
                     } else {
                         $nonOverlappingClaims[$previousClaimId]++;
                         if ($nonOverlappingClaims[$previousClaimId] === $countClaims - 1) {
-                            return $previousClaimId;
+                            return (string)$previousClaimId;
                         }
                     }
                 }
