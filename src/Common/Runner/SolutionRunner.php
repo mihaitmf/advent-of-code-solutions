@@ -88,7 +88,7 @@ class SolutionRunner
      */
     private function getProblemInput($year, $day)
     {
-        $projectRootDirectoryPath = dirname(dirname(__DIR__));
+        $projectRootDirectoryPath = dirname(dirname(dirname(__DIR__)));
         $inputFilePath = $this->mapper->getInputFilePath($year, $day);
         $absoluteInputFilePath = $projectRootDirectoryPath . DIRECTORY_SEPARATOR . $inputFilePath;
 
