@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode\Tests;
+namespace AdventOfCode\Tests\Common\Runner;
 
 use DirectoryIterator;
 use PHPUnit\Framework\TestCase;
@@ -55,7 +55,7 @@ class RunnableFileTest extends TestCase
      */
     private function projectRootDirectory()
     {
-        return dirname(__DIR__);
+        return dirname(dirname(dirname(__DIR__)));
     }
 
     /**
