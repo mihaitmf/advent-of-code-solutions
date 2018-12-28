@@ -37,6 +37,10 @@
             <directory>test</directory>
         </testsuite>
     </testsuites>
+    
+    <listeners>
+        <listener class="AdventOfCode\Tests\TestResourceUsageListener" />
+    </listeners>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
