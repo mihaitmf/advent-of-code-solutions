@@ -29,12 +29,12 @@ class SolutionRunner
     public function run($year, $day, $part)
     {
         if (
-            !is_numeric($year) || $year < 2017 || $year > 2018
+            !is_numeric($year) || $year < 2017
             || !is_numeric($day) || $day < 1 || $day > 25
             || !is_numeric($part) || $part < 1 || $part > 2
         ) {
             throw new InvalidArgumentException("Invalid arguments for solution runner!"
-                . " First argument is the Year of the event, must be an integer between 2017 - 2018."
+                . " First argument is the Year of the event, must be an integer greater than or equal to 2017."
                 . " Second argument is the Day of the problem, must be an integer between 1 - 25."
                 . " Third argument is the Part of the problem, must be an integer between 1 - 2."
             );
