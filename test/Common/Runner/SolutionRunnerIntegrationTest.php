@@ -1,9 +1,9 @@
 <?php
 
-namespace AdventOfCode\Tests\Common;
+namespace AdventOfCode\Tests\Common\Runner;
 
 use AdventOfCode\Common\Container;
-use AdventOfCode\Common\SolutionRunner;
+use AdventOfCode\Common\Runner\SolutionRunner;
 use PHPUnit\Framework\TestCase;
 
 class SolutionRunnerIntegrationTest extends TestCase

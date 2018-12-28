@@ -1,7 +1,7 @@
 <?php
 
 use AdventOfCode\Common\Container;
-use AdventOfCode\Common\SolutionRunner;
+use AdventOfCode\Common\Runner\SolutionRunner;
 
 $startTime = microtime(true);
 

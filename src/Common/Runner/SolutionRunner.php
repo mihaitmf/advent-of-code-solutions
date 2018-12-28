@@ -1,7 +1,10 @@
 <?php
 
-namespace AdventOfCode\Common;
+namespace AdventOfCode\Common\Runner;
 
+use AdventOfCode\Common\Container;
+use AdventOfCode\Common\ExamplesProvider;
+use AdventOfCode\Common\Solver;
 use Exception;
 use InvalidArgumentException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode\Common;
+namespace AdventOfCode\Common\Runner;
 
 class DaysSolversMapper
 {
