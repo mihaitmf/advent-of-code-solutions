@@ -4,8 +4,6 @@ use AdventOfCode\Common\Container;
 use AdventOfCode\Common\Runner\CommandLineArgumentsParser;
 use AdventOfCode\Common\Runner\SolutionRunner;
 
-$startTime = microtime(true);
-
 require_once __DIR__ . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 try {
@@ -23,9 +21,3 @@ try {
 } catch (Exception $exception) {
     print("Exception: {$exception->getMessage()}");
 }
-
-print(sprintf(
-    "\n\nExecution time: %.4f seconds\nMemory peak usage: %.2f MB\n",
-    microtime(true) - $startTime,
-    memory_get_peak_usage(true) / 1024 / 1024
-));

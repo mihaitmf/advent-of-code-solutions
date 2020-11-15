@@ -3,18 +3,11 @@
 use AdventOfCode\Common\Container;
 use AdventOfCode\Common\InputParser;
 
-$startTime = microtime(true);
-
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 $input = trim(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "input.txt"));
 $result = solve($input);
 print($result);
-print(sprintf(
-    "\n\nExecution time: %.4f seconds\nMemory peak usage: %.2f MB\n",
-    microtime(true) - $startTime,
-    memory_get_peak_usage(true) / 1024 / 1024
-));
 
 function solve($input)
 {
