@@ -1,3 +1,5 @@
+dist: trusty # needed for php 5.5
+
 language: php
 
 php:
