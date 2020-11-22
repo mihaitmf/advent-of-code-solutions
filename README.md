@@ -1,4 +1,4 @@
-# Advent of Code Solutions 2017 - 2018
+# Advent of Code Solutions
 [![Build Status](https://travis-ci.org/mihaitmf/advent-of-code-solutions.svg?branch=master)](https://travis-ci.org/mihaitmf/advent-of-code-solutions)
 
 :santa: :christmas_tree: Christmas is approaching so this is a great time to solve some really nice programming puzzles.
