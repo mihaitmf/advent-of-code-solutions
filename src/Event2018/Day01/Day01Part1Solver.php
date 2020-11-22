@@ -60,20 +60,20 @@ class Day01Part1Solver implements Solver
             $operator = $item[0];
             $value = (int)substr($item, 1);
 
-            $result = $this->doOperation($operator, $value, $result);
+            $result = $this->doOperation($result, $operator, $value);
         }
 
         return (string)$result;
     }
 
     /**
+     * @param int $result
      * @param string $operator
      * @param int $value
-     * @param int $result
      *
      * @return int
      */
-    public function doOperation($operator, $value, $result)
+    public function doOperation($result, $operator, $value)
     {
         switch ($operator) {
             case "+":

@@ -54,9 +54,9 @@ class Day01Part2Solver implements Solver
      */
     public function solve($input)
     {
-        $results = [];
-        $currentResult = 0;
-        $results[$currentResult] = 1;
+        $currentFrequency = 0;
+        $frequencies = [];
+        $frequencies[0] = 1;
 
         $items = $this->inputParser->parseRows($input);
 
@@ -65,13 +65,13 @@ class Day01Part2Solver implements Solver
                 $operator = $item[0];
                 $value = (int)substr($item, 1);
 
-                $currentResult = $this->part1Solver->doOperation($operator, $value, $currentResult);
+                $currentFrequency = $this->part1Solver->doOperation($currentFrequency, $operator, $value);
 
-                if (array_key_exists($currentResult, $results)) {
-                    return (string)$currentResult;
+                if (array_key_exists($currentFrequency, $frequencies)) {
+                    return (string)$currentFrequency;
                 }
 
-                $results[$currentResult] = 1;
+                $frequencies[$currentFrequency] = 1;
             }
         }
     }

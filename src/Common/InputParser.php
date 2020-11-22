@@ -33,21 +33,4 @@ class InputParser
     {
         return explode(" ", $input);
     }
-
-    /**
-     * @param string $input
-     *
-     * @return string[][]
-     */
-    public function parseMatrix($input)
-    {
-        $matrix = [];
-        $rows = parseRows($input);
-
-        foreach ($rows as $row) {
-            $matrix[] = parseItemsByTab($row);
-        }
-
-        return $matrix;
-    }
 }

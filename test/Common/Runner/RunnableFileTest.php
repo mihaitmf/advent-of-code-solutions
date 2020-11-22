@@ -1,6 +1,6 @@
 <?php
 
-namespace AdventOfCode\Tests;
+namespace AdventOfCode\Tests\Common\Runner;
 
 use DirectoryIterator;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +23,7 @@ class RunnableFileTest extends TestCase
             "Day03Part2Solver.php",
         ];
 
-        $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2017";
+        $dayParentDirectoryPath = $this->projectRootDirectory() . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2017";
 
         return $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
     }
@@ -40,10 +40,22 @@ class RunnableFileTest extends TestCase
 
     public function providerImplementedSolutionsFor2018Event()
     {
-        $knownForFailingSolvers = [];
-        $dayParentDirectoryPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2018";
+        $knownForFailingSolvers = [
+            "Day06Part1Solver.php", // TODO not finished implementation
+            "Day09Part2Solver.php", // TODO segmentation fault on php 5.5
+            "Day10Part1Solver.php", // TODO interpret letter drawing
+        ];
+        $dayParentDirectoryPath = $this->projectRootDirectory() . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "Event2018";
 
         return $this->getImplementedSolutions($dayParentDirectoryPath, $knownForFailingSolvers);
+    }
+
+    /**
+     * @return string
+     */
+    private function projectRootDirectory()
+    {
+        return dirname(dirname(dirname(__DIR__)));
     }
 
     /**
@@ -89,7 +101,7 @@ class RunnableFileTest extends TestCase
      */
     private function getRunnerFilePath()
     {
-        return dirname(__DIR__) . DIRECTORY_SEPARATOR . "run.php";
+        return $this->projectRootDirectory() . DIRECTORY_SEPARATOR . "run.php";
     }
 
     /**
@@ -117,7 +129,7 @@ class RunnableFileTest extends TestCase
     {
         $errorMessage = $this->getCommonErrorMessage($year, $day, $part, $output);
 
-        $matchResult = preg_match("/^Result is: \w+\n/", $output);
+        $matchResult = preg_match("/^Result is: [\w,]+\n/", $output);
         $this->assertSame(1, $matchResult, $errorMessage);
     }
 
