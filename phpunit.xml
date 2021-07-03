@@ -1,6 +1,6 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/4.8/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.4/phpunit.xsd"
         backupGlobals="false"
         backupStaticAttributes="false"
         bootstrap="bootstrap.php"
@@ -24,9 +24,7 @@
         beStrictAboutTestsThatDoNotTestAnything="true"
         beStrictAboutTodoAnnotatedTests="true"
         beStrictAboutCoversAnnotation="true"
-        checkForUnintentionallyCoveredCode="true"
         enforceTimeLimit="true"
-        beStrictAboutTestSize="true"
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
